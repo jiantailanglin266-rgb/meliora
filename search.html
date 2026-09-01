@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>クリニック検索｜MELIORA</title>
+<meta name="description" content="エリア×施術×価格帯×こだわり条件でクリニックを横断検索。料金・保証・アクセス・診療時間を同じ基準で比較できます。MELIORA クリニック検索データベース。">
+<meta name="robots" content="noindex"><!-- デモ公開中はnoindex。本番公開時に削除 -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Noto+Serif+JP:wght@300;400;500&family=Noto+Sans+JP:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<div class="bg-canvas" aria-hidden="true"></div>
+<div class="bg-grain" aria-hidden="true"></div>
+
+<header class="header js-header">
+  <a class="logo" href="index.html">MELIORA</a>
+  <nav class="nav" aria-label="メイン">
+    <a href="shindan.html">悩み診断</a>
+    <a href="treatment-aga.html">施術を知る</a>
+    <a href="search.html">クリニック検索</a>
+    <a href="index.html#compare">比較する</a>
+    <a href="index.html#knowledge">読みもの</a>
+  </nav>
+  <a class="btn" href="shindan.html">診断してみる</a>
+</header>
+
+<main id="top">
+
+<section class="page-hero section-dark section-dark--top" aria-label="クリニック検索">
+  <div class="hero-visual" aria-hidden="true">
+    <!-- 要差替: VIDEO 07 高級感のあるクリニック空間の映像 -->
+    <div class="hero-film hero-settle" style="background:
+      linear-gradient(90deg, rgba(226,210,184,.14) 0%, rgba(226,210,184,0) 34%),
+      radial-gradient(60% 60% at 78% 32%, rgba(210,190,158,.16) 0%, rgba(210,190,158,0) 60%),
+      linear-gradient(175deg,#221e18 0%,#141210 58%,#0d0c0b 100%)"></div>
+    <div class="hero-vignette"></div>
+  </div>
+  <div class="inner">
+    <p class="breadcrumb reveal"><a href="index.html">MELIORA</a>　/　クリニック検索</p>
+    <p class="hero-en reveal">Find a Clinic</p>
+    <h1 class="reveal" style="animation-delay:100ms">条件を重ねて、<br>候補を絞り込む。</h1>
+    <p class="hero-sub reveal" style="animation-delay:200ms">エリア、施術、価格帯、こだわり。ひとつの条件だけで決めないための検索です。</p>
+  </div>
+</section>
+
+<section style="padding-top:clamp(120px,16vw,240px)">
+  <div class="inner">
+    <p class="demo-note reveal">デモ表示です。掲載されているクリニックはすべて架空のサンプルであり、実在の医療機関ではありません。<!-- 要差替: 実データ投入時にこの注記を削除 --></p>
+
+    <div class="filter-panel reveal" style="animation-delay:120ms">
+      <div class="filter-group">
+        <p class="fg-label">Area — エリア</p>
+        <div class="filter-row--wrap" data-group="city">
+          <button class="fchip" data-v="tokyo">東京</button>
+          <button class="fchip" data-v="osaka">大阪</button>
+          <button class="fchip" data-v="nagoya">名古屋</button>
+          <button class="fchip" data-v="fukuoka">福岡</button>
+          <button class="fchip" data-v="sapporo">札幌</button>
+          <button class="fchip" data-v="yokohama">横浜</button>
+          <button class="fchip" data-v="kyoto">京都</button>
+          <button class="fchip" data-v="kobe">神戸</button>
+          <button class="fchip" data-v="sendai">仙台</button>
+          <button class="fchip" data-v="hiroshima">広島</button>
+        </div>
+      </div>
+      <div class="filter-group">
+        <p class="fg-label">Treatment — 施術</p>
+        <div class="filter-row--wrap" data-group="cat">
+          <button class="fchip" data-v="aga">AGA・薄毛治療</button>
+          <button class="fchip" data-v="seikei">美容整形</button>
+          <button class="fchip" data-v="icl">ICL・視力矯正</button>
+          <button class="fchip" data-v="mens">包茎・男性医療</button>
+          <button class="fchip" data-v="implant">インプラント</button>
+          <button class="fchip" data-v="veneer">ラミネートベニア・審美歯科</button>
+          <button class="fchip" data-v="datsumo">医療脱毛</button>
+          <button class="fchip" data-v="diet">医療ダイエット・痩身</button>
+        </div>
+      </div>
+      <div class="filter-group">
+        <p class="fg-label">Price — 価格帯</p>
+        <div class="filter-row--wrap" data-group="band">
+          <button class="fchip" data-v="low">〜10万円（月額・低価格帯）</button>
+          <button class="fchip" data-v="mid">10〜50万円</button>
+          <button class="fchip" data-v="high">50万円以上</button>
+        </div>
+      </div>
+      <div class="filter-group">
+        <p class="fg-label">Preference — こだわり</p>
+        <div class="filter-row--wrap" data-group="feat">
+          <button class="fchip" data-v="counseling">カウンセリング無料</button>
+          <button class="fchip" data-v="night">20時以降も診療</button>
+          <button class="fchip" data-v="station">駅徒歩5分以内</button>
+          <button class="fchip" data-v="online">オンライン診療</button>
+          <button class="fchip" data-v="guarantee">保証・アフターケア</button>
+          <button class="fchip" data-v="private">完全個室</button>
+          <button class="fchip" data-v="women">女性医師在籍</button>
+          <button class="fchip" data-v="installment">分割・医療ローン</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="count-line"><strong id="js-count">0</strong><span>件のクリニックが見つかりました</span><button class="reset-link" id="js-reset" type="button">条件をクリア</button></div>
+    <div class="result-grid" id="js-results" aria-live="polite"></div>
+    <div class="empty-note" id="js-empty" hidden>条件に合うクリニックが見つかりませんでした。条件を減らして再度お試しください。</div>
+
+    <p class="cmp-note" style="margin-top:40px">
+      ※「PR」表記のあるクリニックは広告掲載です。掲載順・表示は広告の有無と切り離して編集しています。<br>
+      ※ 費用は自由診療のため全額自己負担です。最新の金額・条件は各クリニックの公式情報を必ずご確認ください。
+    </p>
+  </div>
+</section>
+
+</main>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <nav class="footer-nav" aria-label="フッター">
+      <a href="shindan.html">悩み診断</a>
+      <a href="treatment-aga.html">施術を知る</a>
+      <a href="search.html">クリニック検索</a>
+      <a href="index.html#compare">比較する</a>
+      <a href="index.html#knowledge">読みもの</a>
+    </nav>
+    <div class="footer-base">
+      <span class="footer-logo">MELIORA</span>
+      <span>© MELIORA — 美容医療総合ガイド</span>
+    </div>
+  </div>
+</footer>
+
+<div class="cta-fixed"><a class="btn" href="shindan.html">悩みから診断する</a></div>
+
+<script src="assets/main.js"></script>
+<script>
+(function(){
+  'use strict';
+  /* ▼ サンプルデータ（すべて架空。要差替: 実クリニックデータ） */
+  var CATS = {aga:"AGA・薄毛",seikei:"美容整形",icl:"ICL・視力矯正",mens:"包茎・男性医療",implant:"インプラント",veneer:"ベニア・審美歯科",datsumo:"医療脱毛",diet:"医療ダイエット"};
+  var CITY = {tokyo:"東京",osaka:"大阪",nagoya:"名古屋",fukuoka:"福岡",sapporo:"札幌",yokohama:"横浜",kyoto:"京都",kobe:"神戸",sendai:"仙台",hiroshima:"広島"};
+  var FEAT = {counseling:"カウンセリング無料",night:"20時以降OK",station:"駅徒歩5分",online:"オンライン診療",guarantee:"保証あり",private:"完全個室",women:"女性医師",installment:"分割可"};
+  var DATA = [
+    {name:"ルミエール銀座クリニック",city:"tokyo",cats:["seikei","datsumo"],band:"mid",price:"二重埋没 9.8万円〜",hours:"10:00–19:00",access:"銀座駅 徒歩3分",feats:["counseling","station","women","installment"],pr:true},
+    {name:"アルバ新宿メディカル",city:"tokyo",cats:["aga","mens"],band:"low",price:"AGA内服 月1.6万円〜",hours:"11:00–21:00",access:"新宿駅 徒歩4分",feats:["counseling","night","online","private"],pr:false},
+    {name:"表参道ヴェリタ眼科",city:"tokyo",cats:["icl"],band:"high",price:"ICL両眼 58万円〜",hours:"9:30–18:00",access:"表参道駅 徒歩2分",feats:["counseling","station","guarantee"],pr:true},
+    {name:"ノーブル東京デンタル",city:"tokyo",cats:["implant","veneer"],band:"high",price:"インプラント 38万円/本〜",hours:"9:00–18:00",access:"日本橋駅 徒歩5分",feats:["guarantee","installment","private"],pr:false},
+    {name:"梅田セレネクリニック",city:"osaka",cats:["seikei","diet"],band:"mid",price:"脂肪冷却 2.9万円/部位〜",hours:"10:00–20:00",access:"梅田駅 徒歩5分",feats:["counseling","night","women"],pr:false},
+    {name:"なんばオリオン眼科",city:"osaka",cats:["icl"],band:"high",price:"ICL両眼 54万円〜",hours:"10:00–18:30",access:"なんば駅 徒歩3分",feats:["counseling","station","guarantee","installment"],pr:false},
+    {name:"大阪ミナミ男性医療クリニック",city:"osaka",cats:["mens","aga"],band:"mid",price:"包茎手術 12万円〜",hours:"10:00–20:00",access:"心斎橋駅 徒歩4分",feats:["private","night","online","installment"],pr:true},
+    {name:"栄グレイスデンタル",city:"nagoya",cats:["implant","veneer"],band:"mid",price:"ベニア 11万円/本〜",hours:"9:30–18:30",access:"栄駅 徒歩2分",feats:["counseling","station","guarantee"],pr:false},
+    {name:"名駅スカイスキンクリニック",city:"nagoya",cats:["datsumo","diet"],band:"low",price:"全身脱毛5回 8.8万円〜",hours:"11:00–20:00",access:"名古屋駅 徒歩3分",feats:["counseling","night","women","installment"],pr:false},
+    {name:"天神ルーチェ美容外科",city:"fukuoka",cats:["seikei","datsumo"],band:"mid",price:"二重埋没 8.8万円〜",hours:"10:00–19:00",access:"天神駅 徒歩2分",feats:["counseling","station","women"],pr:false},
+    {name:"博多メンズヘルスクリニック",city:"fukuoka",cats:["aga","mens"],band:"low",price:"AGA内服 月1.5万円〜",hours:"10:00–21:00",access:"博多駅 徒歩5分",feats:["night","online","private"],pr:false},
+    {name:"札幌ポラリス眼科",city:"sapporo",cats:["icl"],band:"high",price:"ICL両眼 52万円〜",hours:"9:00–17:30",access:"大通駅 徒歩4分",feats:["counseling","guarantee"],pr:false},
+    {name:"すすきのノルテ美容クリニック",city:"sapporo",cats:["seikei","diet","datsumo"],band:"mid",price:"医療ダイエット 月2.2万円〜",hours:"11:00–20:00",access:"すすきの駅 徒歩3分",feats:["counseling","night","installment"],pr:false},
+    {name:"横浜ベイサイドデンタル",city:"yokohama",cats:["implant","veneer"],band:"high",price:"インプラント 35万円/本〜",hours:"9:30–18:00",access:"みなとみらい駅 徒歩5分",feats:["guarantee","private","installment"],pr:false},
+    {name:"横浜アリアクリニック",city:"yokohama",cats:["aga","datsumo"],band:"low",price:"AGA内服 月1.7万円〜",hours:"10:00–20:00",access:"横浜駅 徒歩4分",feats:["counseling","night","online","women"],pr:false},
+    {name:"京都みやこ美容医療クリニック",city:"kyoto",cats:["seikei","veneer"],band:"mid",price:"ホワイトニング 3.3万円〜",hours:"10:00–18:30",access:"烏丸駅 徒歩3分",feats:["counseling","station","women","private"],pr:false},
+    {name:"神戸ハーバー眼科",city:"kobe",cats:["icl"],band:"high",price:"ICL両眼 55万円〜",hours:"9:30–18:00",access:"三宮駅 徒歩4分",feats:["counseling","guarantee","installment"],pr:false},
+    {name:"仙台ケヤキメディカル",city:"sendai",cats:["aga","mens","diet"],band:"low",price:"AGA内服 月1.6万円〜",hours:"10:00–20:00",access:"仙台駅 徒歩5分",feats:["counseling","online","private"],pr:false},
+    {name:"広島リヴァーデンタルクリニック",city:"hiroshima",cats:["implant","veneer"],band:"mid",price:"ベニア 9.9万円/本〜",hours:"9:00–18:00",access:"紙屋町 徒歩3分",feats:["counseling","guarantee","installment"],pr:false},
+    {name:"広島アーバン美容クリニック",city:"hiroshima",cats:["seikei","datsumo","diet"],band:"mid",price:"全身脱毛5回 9.6万円〜",hours:"10:00–19:00",access:"八丁堀 徒歩2分",feats:["counseling","women","night"],pr:false}
+  ];
+
+  var state = {city:[],cat:[],band:[],feat:[]};
+
+  /* URLパラメータで初期絞り込み（index のカテゴリーカードから遷移） */
+  var qs = new URLSearchParams(location.search);
+  ['city','cat','band','feat'].forEach(function(k){
+    var v = qs.get(k); if(v) state[k] = v.split(',').filter(Boolean);
+  });
+
+  var panel = document.querySelector('.filter-panel');
+  panel.addEventListener('click', function(ev){
+    var b = ev.target.closest('.fchip'); if(!b) return;
+    var g = b.parentElement.dataset.group, v = b.dataset.v;
+    var i = state[g].indexOf(v);
+    if(i>=0) state[g].splice(i,1); else state[g].push(v);
+    render();
+  });
+  document.getElementById('js-reset').addEventListener('click', function(){
+    state = {city:[],cat:[],band:[],feat:[]}; render();
+    history.replaceState(null,'',location.pathname);
+  });
+
+  function match(c){
+    if(state.city.length && state.city.indexOf(c.city)<0) return false;
+    if(state.cat.length && !state.cat.some(function(x){return c.cats.indexOf(x)>=0})) return false;
+    if(state.band.length && state.band.indexOf(c.band)<0) return false;
+    if(state.feat.length && !state.feat.every(function(x){return c.feats.indexOf(x)>=0})) return false;
+    return true;
+  }
+  function esc(s){return s.replace(/[&<>"]/g,function(m){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[m]})}
+
+  function render(){
+    /* チップの点灯状態を state と同期 */
+    panel.querySelectorAll('[data-group]').forEach(function(row){
+      var g = row.dataset.group;
+      row.querySelectorAll('.fchip').forEach(function(b){
+        b.classList.toggle('is-on', state[g].indexOf(b.dataset.v)>=0);
+      });
+    });
+    var hit = DATA.filter(match);
+    document.getElementById('js-count').textContent = hit.length;
+    var box = document.getElementById('js-results');
+    document.getElementById('js-empty').hidden = hit.length > 0;
+    box.innerHTML = hit.map(function(c){
+      return '<article class="clinic-card">'
+        + '<div class="cc-head"><h3>'+esc(c.name)+(c.pr?'<span class="pr-badge">PR</span>':'')+'</h3>'
+        + '<span class="cc-city">'+CITY[c.city]+'｜'+c.cats.map(function(x){return CATS[x]}).join('・')+'</span></div>'
+        + '<div class="cc-meta"><span><b>費用目安</b>　'+esc(c.price)+'</span><span><b>診療時間</b>　'+c.hours+'</span><span><b>アクセス</b>　'+esc(c.access)+'</span></div>'
+        + '<div class="cc-tags">'+c.feats.map(function(x){return '<span>'+FEAT[x]+'</span>'}).join('')+'</div>'
+        + '<div class="cc-actions">'
+        + '<a href="#" '+(c.pr?'rel="sponsored nofollow"':'')+'>公式サイトで詳細を見る</a>'
+        + '<a href="#">料金・施術内容を確認</a>'
+        + '<a href="#">カウンセリング情報を見る</a>'
+        + '</div></article>';
+    }).join('');
+  }
+  render();
+})();
+</script>
+</body>
+</html>

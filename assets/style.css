@@ -1,0 +1,455 @@
+/* =========================================================
+   0. トークン
+   Black / Charcoal / Warm Ivory / Stone Gray / Champagne Gold
+   ========================================================= */
+:root{
+  --font-display:"Cormorant Garamond","Times New Roman",serif;
+  --font-serif:"Noto Serif JP","Hiragino Mincho ProN",serif;
+  --font-body:"Noto Sans JP","Hiragino Sans","Yu Gothic",sans-serif;
+
+  --ivory:#f2ede3;          /* Warm Ivory: ページ地（.bg-canvas 中心色と一致） */
+  --ivory-2:#ece6d9;
+  --ink:#26241f;            /* アイボリー地の文字 */
+  --ink-2:#6d685e;          /* Stone Gray 系 */
+  --dark:#121114;           /* Black / Charcoal */
+  --dark-2:#1a181c;
+  --moon:#eee9df;           /* 濃色地の文字 */
+  --moon-2:#a29d92;
+  --gold:#c0a06a;           /* Champagne Gold: 極少量 */
+  --gold-rgb:192,160,106;
+
+  --ease:cubic-bezier(.22,1,.36,1);
+  --dur:1100ms;
+  --stagger:80ms;
+  --radius:2px;
+  --max:1180px;
+  --gutter:clamp(20px,5vw,72px);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;overflow-x:clip}
+body{
+  font-family:var(--font-body);font-weight:300;color:var(--ink);background:transparent;
+  line-height:2;letter-spacing:.04em;font-feature-settings:"palt";
+  overflow-x:hidden;
+}
+img{max-width:100%;height:auto;display:block}
+a{color:inherit;text-decoration:none}
+ul{list-style:none}
+::selection{background:rgba(var(--gold-rgb),.25)}
+
+/* =========================================================
+   処方A — ページ全体を1枚の連続背景（Warm Ivory基調）
+   ========================================================= */
+.bg-canvas{position:fixed;inset:0;z-index:-2;pointer-events:none;
+  background:
+    radial-gradient(120% 60% at 50% -10%, #f7f3ea 0%, rgba(247,243,234,0) 60%),
+    radial-gradient(90% 55% at 106% 40%, #ede6d7 0%, rgba(237,230,215,0) 58%),
+    radial-gradient(80% 55% at -6% 72%, #f0ebe0 0%, rgba(240,235,224,0) 60%),
+    linear-gradient(180deg, #f2ede3 0%, #eee8dc 48%, #f1ebdf 100%);
+}
+/* 処方B — SVGグレイン（フィルム粒子）でバンディング撹拌 */
+.bg-grain{position:fixed;inset:0;z-index:60;pointer-events:none;opacity:.042;mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size:200px 200px;}
+section{background:transparent;position:relative;padding:clamp(88px,12vw,168px) var(--gutter)}
+.inner{max-width:var(--max);margin:0 auto;position:relative}
+
+/* 処方C — 濃色セクションは ±240px・3ストップの移行帯で溶かす */
+.section-dark{color:var(--moon);isolation:isolate}
+.section-dark::before{content:"";position:absolute;inset:-240px 0;z-index:-1;
+  background:linear-gradient(180deg, rgba(18,17,20,0) 0%, rgba(18,17,20,.55) 120px, var(--dark) 240px, var(--dark) calc(100% - 240px), rgba(18,17,20,.55) calc(100% - 120px), rgba(18,17,20,0) 100%);}
+.section-dark--top::before{inset:0 0 -240px 0;
+  background:linear-gradient(180deg, var(--dark) 0%, var(--dark) calc(100% - 240px), rgba(18,17,20,.55) calc(100% - 120px), rgba(18,17,20,0) 100%);}
+.section-dark--bottom::before{inset:-240px 0 0 0;
+  background:linear-gradient(180deg, rgba(18,17,20,0) 0%, rgba(18,17,20,.55) 120px, var(--dark) 240px, var(--dark) 100%);}
+.hairline{height:1px;opacity:.55;margin:0 var(--gutter);
+  background:linear-gradient(90deg, transparent, rgba(var(--gold-rgb),.35), transparent)}
+
+/* =========================================================
+   処方D — ビジュアルの馴染ませ（共通グレード＋マスクフェード）
+   ここでは写真の代わりに「光と影」の抽象グラデーションを使用。
+   実写・映像差替時は同一クラスをそのまま適用すること。
+   ========================================================= */
+.vis{position:relative;isolation:isolate;overflow:hidden;border-radius:var(--radius);
+  -webkit-mask-image:linear-gradient(180deg,transparent,#000 9%,#000 91%,transparent),linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent);
+  mask-image:linear-gradient(180deg,transparent,#000 9%,#000 91%,transparent),linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent);
+  -webkit-mask-composite:source-in;mask-composite:intersect;}
+.vis>.vis-core{position:absolute;inset:0;transform:scale(1.04);
+  transition:transform 1600ms var(--ease);
+  filter:saturate(.9) contrast(1.03) brightness(1.02);}
+.vis::after{content:"";position:absolute;inset:0;pointer-events:none;mix-blend-mode:multiply;
+  background:linear-gradient(180deg, rgba(18,17,20,.06), rgba(18,17,20,.18))}
+a:hover .vis>.vis-core, .cat-card:hover .vis>.vis-core{transform:scale(1.06)} /* ホバー約2%のみ */
+
+/* 光と影の抽象ビジュアル（要差替: 実写映像/写真。VIDEO 01〜08 対応をコメントで明記） */
+.vis--hair .vis-core{background:
+  linear-gradient(118deg, rgba(201,164,110,0) 30%, rgba(201,164,110,.30) 46%, rgba(214,182,132,.44) 52%, rgba(201,164,110,.26) 58%, rgba(201,164,110,0) 74%),
+  radial-gradient(120% 80% at 20% 96%, #1f1b17 0%, rgba(31,27,23,0) 70%),
+  linear-gradient(160deg,#282420 0%,#161310 55%,#0e0c0a 100%)}
+.vis--face .vis-core{background:
+  radial-gradient(46% 120% at 24% 40%, rgba(224,200,172,.30) 0%, rgba(224,200,172,.10) 44%, rgba(224,200,172,0) 68%),
+  radial-gradient(90% 90% at 90% 92%, #15131a 0%, rgba(21,19,26,0) 70%),
+  linear-gradient(200deg,#232028 0%,#131116 60%,#0d0c10 100%)}
+.vis--eyes .vis-core{background:
+  radial-gradient(44% 7% at 52% 48%, rgba(216,228,234,.42) 0%, rgba(196,212,222,.16) 55%, rgba(196,212,222,0) 100%),
+  radial-gradient(60% 34% at 55% 52%, rgba(178,198,210,.15) 0%, rgba(178,198,210,0) 62%),
+  linear-gradient(170deg,#1b1f24 0%,#101318 60%,#0b0d10 100%)}
+.vis--smile .vis-core{background:
+  radial-gradient(70% 42% at 50% 72%, rgba(230,207,180,.32) 0%, rgba(230,207,180,.10) 46%, rgba(230,207,180,0) 66%),
+  linear-gradient(190deg,#272220 0%,#151210 62%,#0d0b0a 100%)}
+.vis--body .vis-core{background:
+  radial-gradient(9% 46% at 64% 46%, rgba(216,210,198,.34) 0%, rgba(210,203,190,.14) 55%, rgba(210,203,190,0) 100%),
+  radial-gradient(34% 60% at 60% 50%, rgba(210,203,190,.10) 0%, rgba(210,203,190,0) 62%),
+  linear-gradient(150deg,#211f20 0%,#131213 58%,#0c0c0d 100%)}
+.vis--men .vis-core{background:
+  linear-gradient(105deg, rgba(18,17,20,0) 44%, rgba(190,168,128,.22) 50%, rgba(18,17,20,0) 56%),
+  radial-gradient(80% 80% at 20% 20%, #1c1a1e 0%, rgba(28,26,30,0) 70%),
+  linear-gradient(180deg,#19171b 0%,#100f12 60%,#0c0b0d 100%)}
+.vis--clinic .vis-core{background:
+  linear-gradient(90deg, rgba(226,210,184,.2) 0%, rgba(226,210,184,0) 30%),
+  radial-gradient(70% 60% at 80% 30%, rgba(210,190,158,.18) 0%, rgba(210,190,158,0) 60%),
+  linear-gradient(175deg,#242019 0%,#141210 62%,#0e0d0b 100%)}
+
+/* =========================================================
+   処方E — モーション（ゆっくり像を結ぶ）
+   ========================================================= */
+@keyframes reveal{from{opacity:0;transform:translateY(26px) scale(.988);filter:blur(7px)}to{opacity:1;transform:none;filter:blur(0)}}
+.reveal{animation:reveal var(--dur) var(--ease) both;animation-play-state:paused}
+.reveal.is-in{animation-play-state:running}
+.stagger>*{animation:reveal var(--dur) var(--ease) both;animation-play-state:paused;animation-delay:calc(var(--i,0)*var(--stagger))}
+.stagger.is-in>*{animation-play-state:running}
+
+/* キー演出（1サイト1つ）: 「光がゆっくり差す」ライトドリフト
+   コンセプト「選ぶ＝暗がりの中から、自分の輪郭が静かに現れる」の翻訳 */
+@keyframes lightDrift{
+  0%{transform:translate3d(-6%, -3%, 0) scale(1)}
+  50%{transform:translate3d(5%, 3%, 0) scale(1.06)}
+  100%{transform:translate3d(-6%, -3%, 0) scale(1)}
+}
+.light-drift{animation:lightDrift 36s ease-in-out infinite;will-change:transform}
+@keyframes heroSettle{from{transform:scale(1.08)}to{transform:scale(1.02)}}
+.hero-settle{animation:heroSettle 3200ms var(--ease) both}
+
+/* 検証用QAモード（?qa=1）: モーションを即完了させて全要素を表示 */
+.is-qa .reveal,.is-qa .stagger>*{animation:none!important;opacity:1!important;transform:none!important;filter:none!important}
+.is-qa #loading{display:none}
+.is-qa .light-drift,.is-qa .hero-settle{animation:none!important}
+.is-qa .hero{min-height:860px}
+.is-qa .final{min-height:760px}
+@media (prefers-reduced-motion:reduce){
+  .reveal,.stagger>*{animation:none!important;opacity:1!important;transform:none!important;filter:none!important}
+  .light-drift,.hero-settle{animation:none!important}
+  .js-parallax{transform:none!important}
+  html{scroll-behavior:auto}
+  #loading{display:none}
+}
+
+/* =========================================================
+   1. ローディング — 暗幕にブランド名と金の水平線（1.2秒以内に開幕）
+   ========================================================= */
+#loading{position:fixed;inset:0;z-index:100;background:var(--dark);display:grid;place-items:center;
+  transition:opacity 800ms var(--ease),visibility 0s 800ms}
+#loading.is-done{opacity:0;visibility:hidden}
+#loading .word{font-family:var(--font-display);font-size:clamp(26px,4.4vw,52px);letter-spacing:.34em;color:var(--moon);display:flex;overflow:hidden;padding-left:.34em}
+#loading .word span{display:inline-block;transform:translateY(120%);animation:rise 900ms var(--ease) forwards;animation-delay:calc(var(--i)*55ms)}
+@keyframes rise{to{transform:none}}
+#loading .line{width:min(48vw,320px);height:1px;margin-top:26px;transform:scaleX(0);
+  background:linear-gradient(90deg,transparent,rgba(var(--gold-rgb),.8),transparent);
+  animation:lineGrow 900ms var(--ease) 300ms forwards}
+@keyframes lineGrow{to{transform:scaleX(1)}}
+
+/* =========================================================
+   2. ヘッダー（backdrop-filter はここ1箇所のみ）
+   ========================================================= */
+.header{position:fixed;top:0;left:0;right:0;z-index:50;display:flex;align-items:center;justify-content:space-between;
+  padding:16px var(--gutter);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  background:rgba(18,17,20,.42);color:var(--moon);
+  transition:background 800ms var(--ease)}
+.header.on-light{background:rgba(242,237,227,.6);color:var(--ink)}
+.header .logo{font-family:var(--font-display);font-size:21px;letter-spacing:.3em;padding-left:.3em}
+.nav{display:flex;gap:30px;font-size:12px;letter-spacing:.16em}
+.nav a{position:relative;padding:4px 0;opacity:.85}
+.nav a::after{content:"";position:absolute;left:0;bottom:0;height:1px;width:100%;background:currentColor;transform:scaleX(0);transform-origin:right;transition:transform 600ms var(--ease)}
+.nav a:hover::after{transform:scaleX(1);transform-origin:left}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:14px 30px;border:1px solid rgba(var(--gold-rgb),.55);border-radius:999px;
+  font-size:13px;letter-spacing:.14em;color:inherit;
+  transition:background 700ms var(--ease),color 700ms var(--ease),border-color 700ms var(--ease)}
+.btn:hover{background:var(--gold);border-color:var(--gold);color:#171410}
+.btn--solid{background:rgba(var(--gold-rgb),.14)}
+.header .btn{padding:10px 22px;font-size:12px}
+@media (max-width:900px){.nav{display:none}}
+
+/* =========================================================
+   3. 見出し — 欧文ディスプレイ × 和文明朝の2層
+   ========================================================= */
+.h-display{font-family:var(--font-display);font-weight:400;line-height:1.02;letter-spacing:.04em;font-size:clamp(46px,8.4vw,124px)}
+.h2{font-family:var(--font-display);font-weight:400;font-size:clamp(34px,4.6vw,64px);line-height:1.08;letter-spacing:.05em}
+.h-ja{font-family:var(--font-serif);font-weight:400;font-size:clamp(19px,2.3vw,27px);line-height:1.9;letter-spacing:.12em;margin-top:16px}
+.kicker{font-family:var(--font-display);font-size:12px;letter-spacing:.42em;color:var(--gold);margin-bottom:22px;text-transform:uppercase}
+.lead{font-size:clamp(14px,1.35vw,16px);line-height:2.4;max-width:38em;color:var(--ink-2)}
+.section-dark .lead{color:var(--moon-2)}
+.bgword{position:absolute;z-index:-1;font-family:var(--font-display);font-weight:400;line-height:1;
+  font-size:clamp(120px,22vw,340px);letter-spacing:.02em;opacity:.05;pointer-events:none;user-select:none;white-space:nowrap}
+@media (max-width:767px){.bgword{display:none}}
+
+/* =========================================================
+   4. HERO — シネマティック（キー演出の在り処）
+   ========================================================= */
+.hero{min-height:100svh;display:grid;align-content:end;padding-bottom:clamp(72px,10vh,120px);overflow:clip}
+.hero-visual{position:absolute;inset:0;z-index:-1;overflow:hidden}
+/* 要差替: VIDEO 01（男女の静かなポートレート/24fps/slow dolly）。
+   <video autoplay muted loop playsinline poster="..."> を .hero-film に置き、
+   filter・vignette はそのまま適用する */
+.hero-film{position:absolute;inset:-8%;filter:saturate(.9) contrast(1.05) brightness(.98);
+  background:
+    radial-gradient(52% 66% at 66% 40%, rgba(214,186,150,.30) 0%, rgba(214,186,150,0) 58%),
+    radial-gradient(40% 52% at 30% 56%, rgba(180,168,158,.16) 0%, rgba(180,168,158,0) 60%),
+    radial-gradient(120% 100% at 50% 118%, #060608 12%, rgba(6,6,8,0) 62%),
+    linear-gradient(165deg, #232028 0%, #17151a 46%, #0d0c0f 100%);}
+.hero-vignette{position:absolute;inset:0;background:radial-gradient(120% 90% at 50% 42%, rgba(6,6,8,0) 46%, rgba(6,6,8,.55) 100%)}
+.hero .inner{width:100%}
+.hero-copy h1{font-family:var(--font-serif);font-weight:400;color:var(--moon);
+  font-size:clamp(30px,4.8vw,58px);line-height:1.7;letter-spacing:.14em}
+.hero-en{font-family:var(--font-display);color:var(--moon);opacity:.6;font-size:clamp(12px,1.2vw,14px);letter-spacing:.5em;margin-bottom:26px;text-transform:uppercase}
+.hero-sub{margin-top:26px;color:var(--moon-2);font-size:clamp(13px,1.3vw,15px);line-height:2.3;letter-spacing:.08em}
+@media (max-width:600px){.hero-sub br{display:none}.hero-sub{max-width:34em}}
+.hero-cta{display:flex;flex-wrap:wrap;gap:14px;margin-top:44px;color:var(--moon)}
+.hero-scroll{position:absolute;right:var(--gutter);bottom:36px;display:flex;align-items:center;gap:14px;
+  color:var(--moon-2);font-size:10px;letter-spacing:.4em;writing-mode:vertical-rl}
+.hero-scroll::after{content:"";width:1px;height:64px;background:linear-gradient(180deg,rgba(var(--gold-rgb),.7),transparent)}
+
+/* =========================================================
+   5. カテゴリー — 人物の一部を切り取るシネマティックカード
+   ========================================================= */
+.cat-grid{display:grid;gap:clamp(14px,1.8vw,22px);grid-template-columns:repeat(3,1fr);margin-top:64px}
+@media (max-width:1023px){.cat-grid{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:600px){.cat-grid{grid-template-columns:1fr}}
+.cat-card{position:relative;display:block;aspect-ratio:4/5;color:var(--moon)}
+@media (max-width:600px){.cat-card{aspect-ratio:16/10}}
+.cat-card .vis{position:absolute;inset:0}
+.cat-card .cat-label{position:absolute;left:26px;bottom:24px;z-index:1;
+  transform:translateY(6px);transition:transform 900ms var(--ease)}
+.cat-card:hover .cat-label{transform:none}
+.cat-label .en{font-family:var(--font-display);font-size:clamp(24px,2.4vw,32px);letter-spacing:.2em}
+.cat-label .ja{display:block;font-size:11.5px;letter-spacing:.14em;color:var(--moon-2);margin-top:8px;
+  opacity:0;transform:translateY(8px);transition:opacity 900ms var(--ease),transform 900ms var(--ease)}
+.cat-card:hover .cat-label .ja{opacity:1;transform:none}
+.cat-card .cat-line{position:absolute;left:26px;bottom:14px;height:1px;width:34px;background:rgba(var(--gold-rgb),.7);
+  transform:scaleX(0);transform-origin:left;transition:transform 900ms var(--ease)}
+.cat-card:hover .cat-line{transform:scaleX(1)}
+
+/* =========================================================
+   6. 悩みから探す（Warm Ivoryゾーン）
+   ========================================================= */
+.concern-list{display:grid;grid-template-columns:repeat(2,1fr);gap:0;margin-top:56px;border-top:1px solid rgba(38,36,31,.1)}
+@media (max-width:767px){.concern-list{grid-template-columns:1fr}}
+.concern-list a{display:flex;align-items:baseline;justify-content:space-between;gap:16px;
+  padding:26px 10px;border-bottom:1px solid rgba(38,36,31,.1);
+  font-family:var(--font-serif);font-size:clamp(16px,1.7vw,20px);letter-spacing:.1em;
+  transition:padding 700ms var(--ease),color 700ms var(--ease)}
+.concern-list a:hover{padding-left:20px;color:#8a6f3e}
+.concern-list a .tag{font-family:var(--font-display);font-size:11px;letter-spacing:.3em;color:var(--ink-2);white-space:nowrap}
+
+/* =========================================================
+   7. 治療ガイド（編集方針）
+   ========================================================= */
+.guide-grid{display:grid;grid-template-columns:5fr 7fr;gap:clamp(32px,5vw,80px);margin-top:64px;align-items:start}
+@media (max-width:900px){.guide-grid{grid-template-columns:1fr}}
+.guide-items{display:grid;grid-template-columns:repeat(2,1fr);gap:0;border-top:1px solid rgba(38,36,31,.1);counter-reset:gi}
+.guide-items li{counter-increment:gi;padding:18px 8px;border-bottom:1px solid rgba(38,36,31,.1);
+  font-size:13.5px;letter-spacing:.08em;display:flex;gap:14px;align-items:baseline}
+.guide-items li::before{content:counter(gi,decimal-leading-zero);font-family:var(--font-display);font-size:12px;color:var(--gold);letter-spacing:.1em}
+@media (max-width:600px){.guide-items{grid-template-columns:1fr}}
+.note-frame{border:1px solid rgba(var(--gold-rgb),.4);padding:clamp(24px,3vw,40px);font-size:13px;line-height:2.2;color:var(--ink-2);letter-spacing:.06em}
+.note-frame strong{font-weight:500;color:var(--ink);display:block;margin-bottom:10px;font-family:var(--font-serif);letter-spacing:.12em}
+
+/* =========================================================
+   8. クリニック検索
+   ========================================================= */
+.area-grid{display:grid;grid-template-columns:repeat(5,1fr);margin-top:56px;border-top:1px solid rgba(38,36,31,.1);border-left:1px solid rgba(38,36,31,.1)}
+@media (max-width:767px){.area-grid{grid-template-columns:repeat(2,1fr)}}
+.area-grid a{display:grid;place-items:center;gap:2px;padding:30px 8px;
+  border-right:1px solid rgba(38,36,31,.1);border-bottom:1px solid rgba(38,36,31,.1);
+  transition:background 700ms var(--ease)}
+.area-grid a:hover{background:rgba(var(--gold-rgb),.08)}
+.area-grid .en{font-family:var(--font-display);font-size:15px;letter-spacing:.24em}
+.area-grid .ja{font-size:11px;letter-spacing:.2em;color:var(--ink-2)}
+.filter-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:34px}
+.chip{font-size:12px;letter-spacing:.12em;padding:10px 20px;border:1px solid rgba(38,36,31,.18);border-radius:999px;
+  transition:border-color 600ms var(--ease),color 600ms var(--ease)}
+.chip:hover{border-color:var(--gold);color:#8a6f3e}
+
+/* =========================================================
+   9. 比較テーブル
+   ========================================================= */
+.cmp-wrap{margin-top:56px;overflow-x:auto;-webkit-overflow-scrolling:touch}
+.cmp{width:100%;min-width:760px;border-collapse:collapse;font-size:13px;letter-spacing:.04em}
+.cmp th,.cmp td{padding:18px 16px;text-align:left;vertical-align:top;border-bottom:1px solid rgba(38,36,31,.1);line-height:1.9}
+.cmp thead th{font-family:var(--font-serif);font-weight:400;font-size:14.5px;letter-spacing:.1em;border-bottom:1px solid rgba(38,36,31,.28)}
+.cmp tbody th{font-weight:400;color:var(--ink-2);font-size:12px;letter-spacing:.14em;white-space:nowrap;width:9em}
+.pr-badge{display:inline-block;font-size:10px;letter-spacing:.2em;color:var(--ink-2);border:1px solid rgba(38,36,31,.25);
+  border-radius:2px;padding:2px 8px;margin-left:10px;vertical-align:middle}
+.cmp .link{border-bottom:1px solid rgba(var(--gold-rgb),.6);padding-bottom:2px;font-size:12.5px;letter-spacing:.08em;transition:color 600ms var(--ease)}
+.cmp .link:hover{color:#8a6f3e}
+.cmp-note{font-size:11.5px;color:var(--ink-2);margin-top:20px;line-height:2.1;letter-spacing:.05em}
+
+/* =========================================================
+   10. FOR MEN（濃色バンド）
+   ========================================================= */
+.men-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(32px,5vw,80px);margin-top:64px;align-items:center}
+@media (max-width:900px){.men-grid{grid-template-columns:1fr}}
+.men-visual{aspect-ratio:4/5;position:relative}
+@media (max-width:900px){.men-visual{aspect-ratio:16/10}}
+.men-list{border-top:1px solid rgba(238,233,223,.14)}
+.men-list a{display:flex;justify-content:space-between;align-items:baseline;gap:16px;padding:22px 8px;
+  border-bottom:1px solid rgba(238,233,223,.14);font-family:var(--font-serif);font-size:16px;letter-spacing:.1em;
+  transition:padding 700ms var(--ease),color 700ms var(--ease)}
+.men-list a:hover{padding-left:18px;color:var(--gold)}
+.men-list .arrow{font-family:var(--font-display);font-size:13px;color:var(--moon-2)}
+.men-words{display:flex;gap:clamp(20px,4vw,48px);margin-top:40px;font-family:var(--font-display);
+  font-size:12px;letter-spacing:.4em;color:var(--moon-2)}
+
+/* =========================================================
+   11. KNOWLEDGE — マガジン
+   ========================================================= */
+.mag-list{margin-top:56px;border-top:1px solid rgba(38,36,31,.1)}
+.mag-list article{border-bottom:1px solid rgba(38,36,31,.1)}
+.mag-list a{display:grid;grid-template-columns:9em 1fr auto;gap:clamp(16px,3vw,48px);align-items:baseline;
+  padding:30px 8px;transition:background 700ms var(--ease)}
+.mag-list a:hover{background:rgba(var(--gold-rgb),.06)}
+@media (max-width:767px){.mag-list a{grid-template-columns:1fr;gap:8px}}
+.mag-cat{font-family:var(--font-display);font-size:11px;letter-spacing:.3em;color:var(--gold);text-transform:uppercase}
+.mag-title{font-family:var(--font-serif);font-size:clamp(16px,1.8vw,20px);letter-spacing:.08em;line-height:1.8}
+.mag-meta{font-size:11px;color:var(--ink-2);letter-spacing:.1em;white-space:nowrap}
+
+/* =========================================================
+   12. 最終CTA・フッター
+   ========================================================= */
+.final{min-height:88svh;display:grid;place-items:center;text-align:center;overflow:clip}
+.final-visual{position:absolute;inset:0;z-index:-1;overflow:hidden}
+/* 要差替: VIDEO 08（男女が都市へ歩き出す後ろ姿・カメラは後方へ引く） */
+.final-film{position:absolute;inset:-8%;filter:saturate(.88) contrast(1.05) brightness(.96);
+  background:
+    linear-gradient(180deg, rgba(214,186,150,.14) 0%, rgba(214,186,150,0) 34%),
+    radial-gradient(50% 62% at 50% 38%, rgba(196,178,152,.20) 0%, rgba(196,178,152,0) 60%),
+    linear-gradient(180deg,#1b191d 0%,#121114 52%,#0b0a0c 100%);}
+.final h2{font-family:var(--font-serif);font-weight:400;color:var(--moon);
+  font-size:clamp(24px,3.6vw,44px);line-height:2;letter-spacing:.16em}
+.final .lead{margin:28px auto 0;color:var(--moon-2)}
+.footer{position:relative;isolation:isolate;color:var(--moon-2);padding:0 var(--gutter) 48px;font-size:12px;letter-spacing:.06em}
+.footer::before{content:"";position:absolute;inset:-240px 0 0 0;z-index:-1;
+  background:linear-gradient(180deg, rgba(11,10,12,0) 0%, rgba(11,10,12,.55) 120px, #0b0a0c 240px, #0b0a0c 100%)}
+.footer-inner{max-width:var(--max);margin:0 auto;display:grid;gap:40px}
+.footer-policy{border:1px solid rgba(238,233,223,.14);padding:clamp(22px,3vw,36px);line-height:2.2;font-size:11.5px}
+.footer-policy strong{display:block;color:var(--moon);font-weight:400;font-family:var(--font-serif);letter-spacing:.14em;margin-bottom:8px}
+.footer-nav{display:flex;flex-wrap:wrap;gap:14px 28px}
+.footer-nav a{transition:color 600ms var(--ease)}
+.footer-nav a:hover{color:var(--gold)}
+.footer-base{display:flex;flex-wrap:wrap;gap:16px;justify-content:space-between;align-items:baseline}
+.footer-logo{font-family:var(--font-display);font-size:18px;letter-spacing:.3em;color:var(--moon)}
+
+.cta-fixed{display:none}
+@media (max-width:767px){
+  .cta-fixed{display:flex;position:fixed;left:16px;right:16px;bottom:16px;z-index:40;gap:10px}
+  .cta-fixed .btn{flex:1;background:rgba(18,17,20,.9);color:var(--moon);border-color:rgba(var(--gold-rgb),.5)}
+}
+/* =========================================================
+   PHASE 2 — 下層ページ共通（page-hero）
+   ========================================================= */
+.page-hero{min-height:52svh;display:grid;align-content:end;padding-bottom:clamp(48px,7vh,80px);overflow:clip}
+.page-hero .inner{width:100%}
+.page-hero h1{font-family:var(--font-serif);font-weight:400;color:var(--moon);font-size:clamp(26px,3.6vw,44px);line-height:1.7;letter-spacing:.14em}
+.page-hero .hero-en{margin-bottom:18px}
+.page-hero .hero-sub{margin-top:18px}
+.breadcrumb{font-size:11px;letter-spacing:.14em;color:var(--moon-2);margin-bottom:20px}
+.breadcrumb a{border-bottom:1px solid rgba(238,233,223,.25);padding-bottom:1px}
+.demo-note{border:1px solid rgba(var(--gold-rgb),.4);padding:14px 20px;font-size:12px;letter-spacing:.08em;color:var(--ink-2);
+  display:flex;gap:10px;align-items:baseline;border-radius:var(--radius)}
+.demo-note::before{content:"※";color:var(--gold)}
+
+/* =========================================================
+   PHASE 2 — クリニック検索（FUNCTION 01・02）
+   ========================================================= */
+.filter-panel{display:grid;gap:28px;margin-top:48px}
+.filter-group .fg-label{font-family:var(--font-display);font-size:11px;letter-spacing:.32em;color:var(--gold);text-transform:uppercase;margin-bottom:12px}
+.filter-row--wrap{display:flex;flex-wrap:wrap;gap:8px}
+.fchip{font-size:12.5px;letter-spacing:.1em;padding:9px 18px;border:1px solid rgba(38,36,31,.18);border-radius:999px;background:transparent;
+  cursor:pointer;color:var(--ink);font-family:var(--font-body);transition:border-color 500ms var(--ease),background 500ms var(--ease),color 500ms var(--ease)}
+.fchip:hover{border-color:rgba(var(--gold-rgb),.7)}
+.fchip.is-on{background:rgba(var(--gold-rgb),.14);border-color:var(--gold);color:#7d6435}
+.count-line{margin-top:40px;font-size:13px;letter-spacing:.12em;color:var(--ink-2);display:flex;align-items:baseline;gap:14px}
+.count-line strong{font-family:var(--font-display);font-size:30px;color:var(--ink);font-weight:400}
+.result-grid{display:grid;gap:18px;margin-top:24px}
+.clinic-card{border:1px solid rgba(38,36,31,.12);border-radius:var(--radius);padding:clamp(20px,3vw,32px);
+  display:grid;gap:14px;background:rgba(255,253,248,.4);transition:border-color 600ms var(--ease)}
+.clinic-card:hover{border-color:rgba(var(--gold-rgb),.6)}
+.clinic-card .cc-head{display:flex;flex-wrap:wrap;align-items:baseline;gap:10px 14px;justify-content:space-between}
+.clinic-card h3{font-family:var(--font-serif);font-weight:400;font-size:clamp(16px,1.8vw,20px);letter-spacing:.08em}
+.cc-city{font-size:11.5px;letter-spacing:.2em;color:var(--ink-2)}
+.cc-meta{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:6px 24px;font-size:12.5px;color:var(--ink-2);letter-spacing:.05em}
+.cc-meta b{font-weight:500;color:var(--ink);letter-spacing:.08em}
+.cc-tags{display:flex;flex-wrap:wrap;gap:6px}
+.cc-tags span{font-size:10.5px;letter-spacing:.1em;color:var(--ink-2);border:1px solid rgba(38,36,31,.14);border-radius:2px;padding:3px 9px}
+.cc-actions{display:flex;flex-wrap:wrap;gap:10px 22px;padding-top:4px}
+.cc-actions a{font-size:12.5px;letter-spacing:.1em;border-bottom:1px solid rgba(var(--gold-rgb),.6);padding-bottom:2px;transition:color 500ms var(--ease)}
+.cc-actions a:hover{color:#8a6f3e}
+.empty-note{margin-top:32px;padding:40px;text-align:center;font-size:13.5px;color:var(--ink-2);border:1px dashed rgba(38,36,31,.2);border-radius:var(--radius)}
+.reset-link{background:none;border:none;cursor:pointer;font-family:var(--font-body);font-size:12px;letter-spacing:.12em;color:var(--ink-2);
+  border-bottom:1px solid rgba(38,36,31,.3);padding:0 0 2px}
+.reset-link:hover{color:#8a6f3e;border-color:rgba(var(--gold-rgb),.6)}
+
+/* =========================================================
+   PHASE 2 — 診断コンテンツ（FUNCTION 05）
+   ========================================================= */
+.quiz-frame{max-width:720px;margin:56px auto 0;border:1px solid rgba(38,36,31,.14);border-radius:var(--radius);
+  padding:clamp(28px,5vw,56px);background:rgba(255,253,248,.5)}
+.quiz-progress{height:1px;background:rgba(38,36,31,.12);margin-bottom:36px;position:relative}
+.quiz-progress i{position:absolute;left:0;top:0;height:1px;background:var(--gold);transition:width 700ms var(--ease)}
+.quiz-step{font-family:var(--font-display);font-size:12px;letter-spacing:.3em;color:var(--gold);margin-bottom:14px}
+.quiz-q{font-family:var(--font-serif);font-size:clamp(18px,2.4vw,24px);letter-spacing:.1em;line-height:1.8;margin-bottom:30px}
+.quiz-opts{display:grid;gap:10px}
+.quiz-opt{text-align:left;font-family:var(--font-body);font-size:14px;letter-spacing:.08em;color:var(--ink);
+  padding:16px 22px;border:1px solid rgba(38,36,31,.16);border-radius:var(--radius);background:transparent;cursor:pointer;
+  transition:border-color 500ms var(--ease),background 500ms var(--ease),padding 500ms var(--ease)}
+.quiz-opt:hover{border-color:var(--gold);background:rgba(var(--gold-rgb),.07);padding-left:30px}
+.quiz-back{margin-top:24px}
+.quiz-result{display:none}
+.quiz-result.is-show{display:block}
+.qr-cat{font-family:var(--font-display);font-size:clamp(26px,3.4vw,40px);letter-spacing:.16em;margin:6px 0 2px}
+.qr-ja{font-family:var(--font-serif);font-size:15px;letter-spacing:.14em;color:var(--ink-2)}
+.qr-memo{margin-top:28px;border-top:1px solid rgba(38,36,31,.1);padding-top:24px}
+.qr-memo li{display:flex;gap:14px;padding:8px 0;font-size:13.5px;color:var(--ink-2);letter-spacing:.06em}
+.qr-memo li::before{content:"—";color:var(--gold)}
+.qr-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:32px}
+
+/* =========================================================
+   PHASE 2 — 治療ガイドLP（FUNCTION 04）
+   ========================================================= */
+.toc{display:flex;flex-wrap:wrap;gap:8px;margin-top:40px}
+.toc a{font-size:11.5px;letter-spacing:.12em;padding:8px 16px;border:1px solid rgba(238,233,223,.25);border-radius:999px;color:var(--moon-2);
+  transition:border-color 500ms var(--ease),color 500ms var(--ease)}
+.toc a:hover{border-color:var(--gold);color:var(--moon)}
+.md-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(20px,3vw,40px);margin-top:48px}
+@media (max-width:767px){.md-grid{grid-template-columns:1fr}}
+.md-frame{border:1px solid rgba(38,36,31,.14);border-radius:var(--radius);padding:clamp(22px,3vw,36px)}
+.md-frame h3{font-family:var(--font-serif);font-weight:400;font-size:16px;letter-spacing:.14em;margin-bottom:16px;display:flex;gap:10px;align-items:baseline}
+.md-frame h3::before{content:"";width:22px;height:1px;background:var(--gold);align-self:center}
+.md-frame li{display:flex;gap:12px;padding:7px 0;font-size:13.5px;line-height:1.9;color:var(--ink-2);letter-spacing:.05em}
+.md-frame li::before{content:"・";color:var(--gold)}
+.tx-step{counter-reset:tx;display:grid;gap:0;margin-top:48px;border-top:1px solid rgba(38,36,31,.1)}
+.tx-step>div{counter-increment:tx;display:grid;grid-template-columns:64px 1fr;gap:20px;padding:26px 8px;border-bottom:1px solid rgba(38,36,31,.1)}
+.tx-step>div::before{content:counter(tx,decimal-leading-zero);font-family:var(--font-display);font-size:22px;color:var(--gold)}
+.tx-step h3{font-family:var(--font-serif);font-weight:400;font-size:16.5px;letter-spacing:.12em;margin-bottom:8px}
+.tx-step p{font-size:13.5px;color:var(--ink-2);line-height:2.1;letter-spacing:.05em}
+.faq{margin-top:48px;border-top:1px solid rgba(38,36,31,.1)}
+.faq details{border-bottom:1px solid rgba(38,36,31,.1)}
+.faq summary{cursor:pointer;padding:22px 8px;font-family:var(--font-serif);font-size:15.5px;letter-spacing:.1em;list-style:none;display:flex;justify-content:space-between;gap:16px}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";font-family:var(--font-display);color:var(--gold);font-size:18px}
+.faq details[open] summary::after{content:"−"}
+.faq .faq-a{padding:0 8px 24px;font-size:13.5px;color:var(--ink-2);line-height:2.2;letter-spacing:.05em;max-width:52em}
+.review-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px;margin-top:48px}
+.review-card{border:1px solid rgba(38,36,31,.12);border-radius:var(--radius);padding:24px 26px;font-size:13px;line-height:2.1;color:var(--ink-2);letter-spacing:.05em;background:rgba(255,253,248,.4)}
+.review-card .rv-head{display:flex;justify-content:space-between;gap:10px;font-size:11.5px;letter-spacing:.12em;color:var(--ink-2);margin-bottom:12px}
+.review-card .rv-head b{font-weight:500;color:var(--ink)}
+.is-qa .page-hero{min-height:520px}

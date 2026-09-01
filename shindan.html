@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>悩みから探す診断｜MELIORA</title>
+<meta name="description" content="5つの質問に答えるだけで、いま検討すべき美容医療のカテゴリーと、次に読むべきガイドをご案内します。施術名を知らなくても大丈夫です。">
+<meta name="robots" content="noindex"><!-- デモ公開中はnoindex。本番公開時に削除 -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Noto+Serif+JP:wght@300;400;500&family=Noto+Sans+JP:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<div class="bg-canvas" aria-hidden="true"></div>
+<div class="bg-grain" aria-hidden="true"></div>
+
+<header class="header js-header">
+  <a class="logo" href="index.html">MELIORA</a>
+  <nav class="nav" aria-label="メイン">
+    <a href="shindan.html">悩み診断</a>
+    <a href="treatment-aga.html">施術を知る</a>
+    <a href="search.html">クリニック検索</a>
+    <a href="index.html#compare">比較する</a>
+    <a href="index.html#knowledge">読みもの</a>
+  </nav>
+  <a class="btn" href="search.html">クリニック検索</a>
+</header>
+
+<main id="top">
+
+<section class="page-hero section-dark section-dark--top" aria-label="悩み診断">
+  <div class="hero-visual" aria-hidden="true">
+    <div class="hero-film hero-settle"><div class="light-drift" style="position:absolute;inset:0;background:radial-gradient(44% 54% at 58% 42%, rgba(224,196,158,.20) 0%, rgba(224,196,158,0) 60%)"></div></div>
+    <div class="hero-vignette"></div>
+  </div>
+  <div class="inner">
+    <p class="breadcrumb reveal"><a href="index.html">MELIORA</a>　/　悩みから探す診断</p>
+    <p class="hero-en reveal">Find Your Concern</p>
+    <h1 class="reveal" style="animation-delay:100ms">5つの質問で、<br>いま知るべき選択肢へ。</h1>
+    <p class="hero-sub reveal" style="animation-delay:200ms">施術の名前を知らなくてかまいません。答えた内容は保存されません。</p>
+  </div>
+</section>
+
+<section style="padding-top:clamp(120px,16vw,240px)">
+  <div class="inner">
+    <div class="quiz-frame reveal" id="js-quiz">
+      <div class="quiz-progress" aria-hidden="true"><i id="js-bar" style="width:0%"></i></div>
+
+      <div id="js-qbox">
+        <p class="quiz-step" id="js-step">QUESTION 01 / 05</p>
+        <h2 class="quiz-q" id="js-q"></h2>
+        <div class="quiz-opts" id="js-opts"></div>
+        <button class="reset-link quiz-back" id="js-back" type="button" hidden>← ひとつ前の質問に戻る</button>
+      </div>
+
+      <div class="quiz-result" id="js-result">
+        <p class="quiz-step">RESULT</p>
+        <p class="qr-cat" id="js-rcat"></p>
+        <p class="qr-ja" id="js-rja"></p>
+        <p style="margin-top:20px;font-size:13.5px;line-height:2.2;color:var(--ink-2);letter-spacing:.05em" id="js-rbody"></p>
+        <ul class="qr-memo" id="js-rmemo"></ul>
+        <div class="qr-actions" id="js-ractions"></div>
+        <button class="reset-link quiz-back" id="js-retry" type="button">最初からやり直す</button>
+      </div>
+    </div>
+
+    <p class="cmp-note" style="max-width:720px;margin:28px auto 0">
+      ※ この診断は情報整理のための簡易ガイドであり、医学的な診断・治療の推奨ではありません。
+      治療の適応は、必ず医療機関での診察・検査のうえでご判断ください。
+    </p>
+  </div>
+</section>
+
+</main>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <nav class="footer-nav" aria-label="フッター">
+      <a href="shindan.html">悩み診断</a>
+      <a href="treatment-aga.html">施術を知る</a>
+      <a href="search.html">クリニック検索</a>
+      <a href="index.html#compare">比較する</a>
+      <a href="index.html#knowledge">読みもの</a>
+    </nav>
+    <div class="footer-base">
+      <span class="footer-logo">MELIORA</span>
+      <span>© MELIORA — 美容医療総合ガイド</span>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/main.js"></script>
+<script>
+(function(){
+  'use strict';
+  /* 診断ロジック: IIFE・保存なし・Enter誤送信なし（formを使わない） */
+  var QS = [
+    {q:"いちばん気になっているのは、どこですか？",
+     opts:[["hair","髪のボリューム・生え際"],["face","顔立ち・肌・輪郭"],["eyes","視力・目元"],["teeth","歯の色・形・欠損"],["body","ムダ毛・体型"],["delicate","人に相談しづらいデリケートな悩み"]]},
+    {q:"差し支えなければ、性別を教えてください。",
+     opts:[["f","女性"],["m","男性"],["na","答えない"]]},
+    {q:"費用のイメージに近いものはどれですか？",
+     opts:[["monthly","月1〜3万円くらいの継続なら"],["mid","10〜30万円のまとまった費用"],["high","50万円以上でも納得できれば"],["unknown","まだ見当がつかない"]]},
+    {q:"ダウンタイム（回復期間）はどのくらい取れますか？",
+     opts:[["none","ほとんど取れない"],["days","2〜3日なら"],["week","1週間以上でも大丈夫"],["dk","わからない"]]},
+    {q:"クリニック選びで、いちばん重視したいことは？",
+     opts:[["price","費用の透明さ"],["record","実績・症例の多さ"],["access","通いやすさ"],["privacy","プライバシーへの配慮"]]}
+  ];
+  var LABEL = {monthly:"月1〜3万円の継続",mid:"10〜30万円",high:"50万円以上も視野",unknown:"費用感はこれから",
+    none:"ダウンタイムはほぼ取れない",days:"ダウンタイムは2〜3日まで",week:"ダウンタイムは1週間以上OK",dk:"ダウンタイムは未定",
+    price:"費用の透明さを重視",record:"実績・症例を重視",access:"通いやすさを重視",privacy:"プライバシーを重視"};
+  var RESULT = {
+    aga:{en:"HAIR / AGA",ja:"薄毛・AGA・FAGA・育毛",cat:"aga",
+      body:"薄毛治療は、内服・外用・注入・植毛と選択肢の幅が広い分野です。月額の継続治療から始められるため、費用の全体像を最初に確認しておくことが大切です。",
+      guide:"treatment-aga.html"},
+    seikei:{en:"FACE / BEAUTY",ja:"美容整形・肌治療",cat:"seikei",
+      body:"顔まわりの治療は、切らない施術から外科手術まで段階があります。ダウンタイムと費用のバランスで選択肢が大きく変わるため、複数の方法を比較してから検討するのが安全です。",
+      guide:"index.html#treatments"},
+    icl:{en:"EYES / ICL",ja:"ICL・視力矯正",cat:"icl",
+      body:"視力矯正は適応検査の結果がすべての前提になります。ICL・レーシックそれぞれに向き不向きがあるため、費用より先に「自分が適応かどうか」を確かめる順番がおすすめです。",
+      guide:"index.html#treatments"},
+    dental:{en:"SMILE / DENTAL",ja:"インプラント・ラミネートベニア・審美歯科",cat:"implant,veneer",
+      body:"歯の治療は1本単位で費用が決まるため、総額と保証年数の確認が最重要です。耐用年数・メンテナンス費まで含めて比較しましょう。",
+      guide:"index.html#treatments"},
+    body:{en:"BODY",ja:"医療脱毛・医療ダイエット・痩身",cat:"datsumo,diet",
+      body:"身体の治療は回数・期間で総額が変わります。1回あたりの価格ではなく「completion（完了）までの総額」で比較するのがポイントです。",
+      guide:"index.html#treatments"},
+    mens:{en:"MEN'S",ja:"包茎手術・男性医療",cat:"mens",
+      body:"デリケートな悩みこそ、プライバシー配慮と保証内容が判断基準になります。完全個室・オンライン診療対応のクリニックから比較を始めるのがおすすめです。",
+      guide:"index.html#formen"}
+  };
+
+  var step = 0, ans = [];
+  var qbox=document.getElementById('js-qbox'), rbox=document.getElementById('js-result');
+  var bar=document.getElementById('js-bar');
+
+  function show(){
+    var q = QS[step];
+    document.getElementById('js-step').textContent = 'QUESTION 0'+(step+1)+' / 05';
+    document.getElementById('js-q').textContent = q.q;
+    var box = document.getElementById('js-opts'); box.innerHTML='';
+    q.opts.forEach(function(o){
+      var b=document.createElement('button'); b.type='button'; b.className='quiz-opt'; b.textContent=o[1];
+      b.addEventListener('click',function(){ ans[step]=o; step++;
+        if(step>=QS.length) finish(); else show(); });
+      box.appendChild(b);
+    });
+    document.getElementById('js-back').hidden = step===0;
+    bar.style.width = (step/QS.length*100)+'%';
+  }
+  document.getElementById('js-back').addEventListener('click',function(){ if(step>0){step--; show();} });
+  document.getElementById('js-retry').addEventListener('click',function(){ step=0; ans=[]; rbox.classList.remove('is-show'); qbox.hidden=false; show(); });
+
+  function decide(){
+    var part=ans[0][0], sex=ans[1][0];
+    if(part==='delicate') return sex==='f' ? 'body' : 'mens';
+    if(part==='hair') return 'aga';
+    if(part==='face') return 'seikei';
+    if(part==='eyes') return 'icl';
+    if(part==='teeth') return 'dental';
+    return 'body';
+  }
+  function finish(){
+    bar.style.width='100%';
+    var r = RESULT[decide()];
+    qbox.hidden=true; rbox.classList.add('is-show');
+    document.getElementById('js-rcat').textContent=r.en;
+    document.getElementById('js-rja').textContent=r.ja;
+    document.getElementById('js-rbody').textContent=r.body;
+    var memo=document.getElementById('js-rmemo'); memo.innerHTML='';
+    [ans[2],ans[3],ans[4]].forEach(function(a){
+      if(!a||!LABEL[a[0]]) return;
+      var li=document.createElement('li'); li.textContent='あなたの検討メモ： '+LABEL[a[0]]; memo.appendChild(li);
+    });
+    var act=document.getElementById('js-ractions'); act.innerHTML='';
+    [['治療ガイドを読む',r.guide,'btn btn--solid'],
+     ['この分野のクリニックを探す','search.html?cat='+r.cat,'btn'],
+     ['比較の見方を知る','index.html#compare','btn']].forEach(function(x){
+      var a=document.createElement('a'); a.className=x[2]; a.href=x[1]; a.textContent=x[0];
+      a.style.color='var(--ink)'; act.appendChild(a);
+    });
+  }
+  show();
+})();
+</script>
+</body>
+</html>

@@ -59,6 +59,12 @@
     var id=a.getAttribute('href'); if(id.length<2) return; var el=document.querySelector(id); if(!el) return;
     ev.preventDefault(); var y=el.getBoundingClientRect().top+scrollY-64; scrollTo({top:y, behavior: reduce?'auto':'smooth'}); }); });
 
+  /* 背景動画: 通常よりゆっくり再生。reduced-motion・モバイルでは静止画（ポスター）に */
+  document.querySelectorAll('video.hero-photo').forEach(function(v){
+    if (reduce || innerWidth < 768) { v.removeAttribute('autoplay'); v.pause(); }
+    else { v.playbackRate = 0.85; var p=v.play(); if(p&&p.catch)p.catch(function(){}); }
+  });
+
   /* YouTubeライトエンベッド：クリックで初めてiframeを読み込む（全ページ共通） */
   document.addEventListener('click', function(ev){
     var b = ev.target.closest('.yt-thumb');

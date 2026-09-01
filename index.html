@@ -52,9 +52,8 @@
 <!-- 2. HERO：キー演出「光がゆっくり差す」。h1は理念そのもの -->
 <section class="hero section-dark section-dark--top" aria-label="メインビジュアル">
   <div class="hero-visual" aria-hidden="true">
-    <!-- 要差替: VIDEO 01 男女の静かなポートレート（24fps / slow dolly / shallow DOF）
-         <video class="hero-film hero-settle" autoplay muted loop playsinline poster="assets/hero.jpg">…</video> -->
-    <img class="hero-photo hero-settle" src="assets/img/hero.jpg" alt="" fetchpriority="high" style="object-position:center 24%">
+    <!-- VIDEO 01: 静かなポートレート（実装済み） -->
+    <video class="hero-photo hero-settle" autoplay muted loop playsinline preload="auto" poster="assets/img/hero-v.jpg" aria-hidden="true"><source src="assets/video/hero.mp4" type="video/mp4"></video>
     <div class="hero-shade"></div>
     <div class="light-drift hero-light" style="background:radial-gradient(46% 58% at 62% 44%, rgba(224,196,158,.26) 0%, rgba(224,196,158,0) 60%)"></div>
     <div class="hero-vignette"></div>
@@ -374,7 +373,7 @@
 <!-- 10. 最終CTA：暗いシネマティックへ -->
 <section class="final section-dark section-dark--bottom" id="start" aria-label="最終案内">
   <div class="final-visual" aria-hidden="true">
-    <img class="hero-photo" src="assets/img/hero.jpg" alt="" loading="lazy" style="object-position:center 30%">
+    <video class="hero-photo" autoplay muted loop playsinline preload="metadata" poster="assets/img/ending-v.jpg" aria-hidden="true"><source src="assets/video/ending.mp4" type="video/mp4"></video>
     <div class="hero-shade" style="background:linear-gradient(180deg, rgba(251,250,247,.9) 0%, rgba(251,250,247,.72) 50%, rgba(251,250,247,.6) 100%)"></div>
     <div class="light-drift hero-light" style="background:radial-gradient(40% 50% at 50% 40%, rgba(216,192,158,.3) 0%, rgba(216,192,158,0) 60%)"></div>
     <div class="hero-vignette"></div>

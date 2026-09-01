@@ -22,6 +22,7 @@
 </head>
 <body>
 <div class="bg-canvas" aria-hidden="true"></div>
+<div class="bg-aurora" aria-hidden="true"></div>
 <div class="bg-grain" aria-hidden="true"></div>
 
 <!-- 0. ローディング：暗幕→ブランド名→金の水平線。VIDEO 01 へ連続させる第一幕 -->
@@ -39,6 +40,7 @@
     <a href="shindan.html">悩み診断</a>
     <a href="treatment-aga.html">施術を知る</a>
     <a href="search.html">クリニック検索</a>
+    <a href="videos.html">映像で知る</a>
     <a href="#compare">比較する</a>
     <a href="#knowledge">読みもの</a>
   </nav>
@@ -52,7 +54,9 @@
   <div class="hero-visual" aria-hidden="true">
     <!-- 要差替: VIDEO 01 男女の静かなポートレート（24fps / slow dolly / shallow DOF）
          <video class="hero-film hero-settle" autoplay muted loop playsinline poster="assets/hero.jpg">…</video> -->
-    <div class="hero-film hero-settle"><div class="light-drift" style="position:absolute;inset:0;background:radial-gradient(46% 58% at 62% 44%, rgba(224,196,158,.22) 0%, rgba(224,196,158,0) 60%)"></div></div>
+    <img class="hero-photo hero-settle" src="assets/img/hero.jpg" alt="" fetchpriority="high" style="object-position:center 24%">
+    <div class="hero-shade"></div>
+    <div class="light-drift hero-light" style="background:radial-gradient(46% 58% at 62% 44%, rgba(224,196,158,.26) 0%, rgba(224,196,158,0) 60%)"></div>
     <div class="hero-vignette"></div>
   </div>
   <div class="inner">
@@ -83,36 +87,36 @@
     <div class="cat-grid stagger">
       <!-- 要差替: VIDEO 02 自然光が髪を横切るマクロ映像 -->
       <a class="cat-card" style="--i:0" href="search.html?cat=aga">
-        <div class="vis vis--hair" aria-hidden="true"><div class="vis-core"></div></div>
+        <div class="vis vis--hair vis--photo" aria-hidden="true"><img class="vis-img" src="assets/img/hair.jpg" alt="" loading="lazy"><div class="vis-shade"></div><div class="vis-core"></div></div>
         <span class="cat-label"><span class="en">HAIR</span><span class="ja">薄毛・AGA・FAGA・育毛</span></span>
         <span class="cat-line" aria-hidden="true"></span>
       </a>
       <!-- 要差替: VIDEO 04 横顔・フェイスライン・肌を柔らかな光で -->
       <a class="cat-card" style="--i:1" href="search.html?cat=seikei">
-        <div class="vis vis--face" aria-hidden="true"><div class="vis-core"></div></div>
+        <div class="vis vis--face vis--photo" aria-hidden="true"><img class="vis-img vis-img--face" src="assets/img/face.jpg" alt="" loading="lazy"><div class="vis-shade"></div><div class="vis-core"></div></div>
         <span class="cat-label"><span class="en">FACE</span><span class="ja">二重・鼻・輪郭・リフトアップ・肌治療</span></span>
         <span class="cat-line" aria-hidden="true"></span>
       </a>
       <!-- 要差替: VIDEO 03 目元と光の反射を抽象的に -->
       <a class="cat-card" style="--i:2" href="search.html?cat=icl">
-        <div class="vis vis--eyes" aria-hidden="true"><div class="vis-core"></div></div>
+        <div class="vis vis--eyes vis--photo" aria-hidden="true"><img class="vis-img vis-img--eyes" src="assets/img/eyes.jpg" alt="" loading="lazy"><div class="vis-shade"></div><div class="vis-core"></div></div>
         <span class="cat-label"><span class="en">EYES</span><span class="ja">ICL・視力矯正</span></span>
         <span class="cat-line" aria-hidden="true"></span>
       </a>
       <!-- 要差替: VIDEO 05 自然な笑顔と口元を上品に -->
       <a class="cat-card" style="--i:3" href="search.html?cat=implant,veneer">
-        <div class="vis vis--smile" aria-hidden="true"><div class="vis-core"></div></div>
+        <div class="vis vis--smile vis--photo" aria-hidden="true"><img class="vis-img vis-img--smile" src="assets/img/smile.jpg" alt="" loading="lazy" style="object-position:center 78%"><div class="vis-shade"></div><div class="vis-core"></div></div>
         <span class="cat-label"><span class="en">SMILE</span><span class="ja">インプラント・ラミネートベニア・審美歯科</span></span>
         <span class="cat-line" aria-hidden="true"></span>
       </a>
       <a class="cat-card" style="--i:4" href="search.html?cat=datsumo,diet">
-        <div class="vis vis--body" aria-hidden="true"><div class="vis-core"></div></div>
+        <div class="vis vis--body vis--photo" aria-hidden="true"><img class="vis-img vis-img--body" src="assets/img/body.jpg" alt="" loading="lazy"><div class="vis-shade"></div><div class="vis-core"></div></div>
         <span class="cat-label"><span class="en">BODY</span><span class="ja">医療脱毛・医療ダイエット・痩身</span></span>
         <span class="cat-line" aria-hidden="true"></span>
       </a>
       <!-- 要差替: VIDEO 06 男性のシルエットを建築的な光で -->
       <a class="cat-card" style="--i:5" href="search.html?cat=mens">
-        <div class="vis vis--men" aria-hidden="true"><div class="vis-core"></div></div>
+        <div class="vis vis--men vis--photo" aria-hidden="true"><img class="vis-img" src="assets/img/mens.jpg" alt="" loading="lazy" style="object-position:center 22%"><div class="vis-shade"></div><div class="vis-core"></div></div>
         <span class="cat-label"><span class="en">MEN'S</span><span class="ja">AGA・包茎手術・男性医療</span></span>
         <span class="cat-line" aria-hidden="true"></span>
       </a>
@@ -124,6 +128,7 @@
 <section id="concern">
   <div class="inner">
     <div class="bgword" style="top:-40px;right:-4%" aria-hidden="true">DISCOVER</div>
+    <span class="ring" style="width:320px;height:320px;top:-70px;right:8%" aria-hidden="true"></span>
     <p class="kicker reveal">01 — Find Your Concern</p>
     <h2 class="h2 reveal">Start from you.</h2>
     <p class="h-ja reveal">悩みから、選択肢を知る。</p>
@@ -213,6 +218,11 @@
       <a class="chip" href="search.html?feat=private">設備・サービスから探す</a>
       <a class="chip" href="search.html?feat=counseling">カウンセリング重視で探す</a>
     </div>
+    <a class="vis vis--photo reveal" href="search.html" style="display:block;position:relative;aspect-ratio:21/9;margin-top:64px" aria-label="クリニック検索へ">
+      <img class="vis-img" src="assets/img/clinic.jpg" alt="" loading="lazy" style="filter:saturate(.55) contrast(1.03) brightness(.72)">
+      <div class="vis-shade"></div>
+      <span style="position:absolute;left:28px;bottom:24px;color:var(--moon);font-family:var(--font-serif);letter-spacing:.14em;font-size:clamp(13px,1.4vw,16px)">静かな空間で、納得できるまで相談できる場所を。<span style="font-family:var(--font-display);font-size:11px;letter-spacing:.3em;margin-left:16px;color:rgba(238,233,223,.85)">SEARCH →</span></span>
+    </a>
   </div>
 </section>
 
@@ -272,7 +282,7 @@
     <div class="men-grid">
       <div class="men-visual reveal" aria-hidden="true">
         <!-- 要差替: VIDEO 06 男性のシルエットを建築的な光で撮影した映像 -->
-        <div class="vis vis--men" style="position:absolute;inset:0"><div class="vis-core light-drift"></div></div>
+        <div class="vis vis--men vis--photo" style="position:absolute;inset:0"><img class="vis-img" src="assets/img/mens.jpg" alt="" loading="lazy" style="object-position:center 18%"><div class="vis-shade"></div><div class="vis-core light-drift"></div></div>
       </div>
       <div>
         <p class="lead reveal">
@@ -295,6 +305,7 @@
 <section id="knowledge" style="padding-top:clamp(140px,20vw,300px)">
   <div class="inner">
     <div class="bgword" style="top:-30px;right:-2%" aria-hidden="true">KNOW</div>
+    <span class="ring ring--solid" style="width:420px;height:420px;top:-40px;left:-6%" aria-hidden="true"></span>
     <p class="kicker reveal">06 — Knowledge</p>
     <h2 class="h2 reveal">Read before you choose.</h2>
     <p class="h-ja reveal">選ぶ前に、知っておく。</p>
@@ -321,6 +332,42 @@
         <span class="mag-meta">監修：○○○○ 医師 ／ 2026.07.12 更新</span>
       </a></article>
     </div>
+  </div>
+</section>
+
+<!-- 9.5. MOVIE：医師の解説動画（カテゴリー別つなぎこみ） -->
+<section id="movie">
+  <div class="inner">
+    <span class="ring" style="width:280px;height:280px;top:-40px;right:4%" aria-hidden="true"></span>
+    <p class="kicker reveal">Movie</p>
+    <h2 class="h2 reveal">Watch &amp; learn.</h2>
+    <p class="h-ja reveal">読む前に、観て掴む。</p>
+    <p class="lead reveal" style="margin-top:32px">
+      医師・医療機関が公開している解説動画を、カテゴリー別に選びました。
+      文章より先に、全体像をつかみたいときに。
+    </p>
+    <div class="yt-grid stagger">
+      <article class="yt" style="--i:0">
+        <div class="yt-frame"><button class="yt-thumb" type="button" data-id="JeNbkwgn83M" aria-label="動画を再生: 薄毛・AGAの仕組みを医師監修で徹底解説"><img src="https://i.ytimg.com/vi/JeNbkwgn83M/hqdefault.jpg" alt="" loading="lazy"><span class="yt-play" aria-hidden="true"></span></button></div>
+        <p class="yt-cat">HAIR / AGA</p>
+        <h3 class="yt-title">薄毛・AGAの仕組みを医師監修で徹底解説</h3>
+        <p class="yt-ch">メディバリー大学病院／医師監修</p>
+      </article>
+      <article class="yt" style="--i:1">
+        <div class="yt-frame"><button class="yt-thumb" type="button" data-id="9btHKLd16-Q" aria-label="動画を再生: 眼科医が教えるICLの全て"><img src="https://i.ytimg.com/vi/9btHKLd16-Q/hqdefault.jpg" alt="" loading="lazy"><span class="yt-play" aria-hidden="true"></span></button></div>
+        <p class="yt-cat">EYES / ICL</p>
+        <h3 class="yt-title">眼科医が教えるICLの全て（検査・費用・リスク）</h3>
+        <p class="yt-ch">眼科医 上月直之</p>
+      </article>
+      <article class="yt" style="--i:2">
+        <div class="yt-frame"><button class="yt-thumb" type="button" data-id="IgoV-ZFzen0" aria-label="動画を再生: 医療脱毛の正しい知識"><img src="https://i.ytimg.com/vi/IgoV-ZFzen0/hqdefault.jpg" alt="" loading="lazy"><span class="yt-play" aria-hidden="true"></span></button></div>
+        <p class="yt-cat">BODY</p>
+        <h3 class="yt-title">医療脱毛の正しい知識｜仕組み・効果・リスク</h3>
+        <p class="yt-ch">あつた皮ふ科・美容皮膚科クリニック</p>
+      </article>
+    </div>
+    <p class="reveal" style="margin-top:44px"><a class="btn" href="videos.html" style="color:var(--ink)">映像ライブラリをすべて見る</a></p>
+    <p class="yt-note">※ 動画は各医療機関・医師がYouTubeで公開しているものを学習用として紹介しています。当サイトの広告掲載とは関係ありません。</p>
   </div>
 </section>
 
@@ -358,6 +405,7 @@
       <a href="shindan.html">悩み診断</a>
       <a href="treatment-aga.html">施術を知る</a>
       <a href="search.html">クリニック検索</a>
+      <a href="videos.html">映像で知る</a>
       <a href="#compare">比較する</a>
       <a href="#formen">メンズ</a>
       <a href="#knowledge">読みもの</a>
@@ -375,5 +423,6 @@
 <div class="cta-fixed"><a class="btn" href="shindan.html">悩みから診断する</a></div>
 
 <script src="assets/main.js"></script>
+<script src="assets/chatbot.js"></script>
 </body>
 </html>

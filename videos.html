@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>映像で知る｜MELIORA</title>
+<meta name="description" content="医師・医療機関による美容医療の解説動画をカテゴリー別に厳選。AGA、ICL、美容整形、インプラント、医療脱毛、メンズ医療の基礎を映像で学べます。">
+<meta name="robots" content="noindex"><!-- デモ公開中はnoindex。本番公開時に削除 -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Noto+Serif+JP:wght@300;400;500&family=Noto+Sans+JP:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<div class="bg-canvas" aria-hidden="true"></div>
+<div class="bg-aurora" aria-hidden="true"></div>
+<div class="bg-grain" aria-hidden="true"></div>
+
+<header class="header js-header">
+  <a class="logo" href="index.html">MELIORA</a>
+  <nav class="nav" aria-label="メイン">
+    <a href="shindan.html">悩み診断</a>
+    <a href="treatment-aga.html">施術を知る</a>
+    <a href="search.html">クリニック検索</a>
+    <a href="videos.html">映像で知る</a>
+    <a href="index.html#knowledge">読みもの</a>
+  </nav>
+  <a class="btn" href="shindan.html">診断してみる</a>
+</header>
+
+<main id="top">
+
+<section class="page-hero section-dark section-dark--top" aria-label="映像で知る">
+  <div class="hero-visual" aria-hidden="true">
+    <img class="hero-photo hero-settle" src="assets/img/eyes.jpg" alt="" style="filter:grayscale(.7) saturate(.4) contrast(1.04) brightness(.42);object-position:center 40%">
+    <div class="hero-shade"></div>
+    <div class="light-drift hero-light" style="background:radial-gradient(44% 54% at 60% 42%, rgba(224,196,158,.22) 0%, rgba(224,196,158,0) 60%)"></div>
+    <div class="hero-vignette"></div>
+  </div>
+  <div class="inner">
+    <p class="breadcrumb reveal"><a href="index.html">MELIORA</a>　/　映像で知る</p>
+    <p class="hero-en reveal">Watch &amp; Learn</p>
+    <h1 class="reveal" style="animation-delay:100ms">読む前に、<br>観て掴む。</h1>
+    <p class="hero-sub reveal" style="animation-delay:200ms">医師・医療機関が公開している解説動画を、カテゴリー別に選びました。</p>
+  </div>
+</section>
+
+<section style="padding-top:clamp(120px,16vw,240px)">
+  <div class="inner">
+    <div class="filter-row--wrap yt-filter reveal" data-group="vcat" aria-label="カテゴリーで絞り込み">
+      <button class="fchip is-on" data-v="all">すべて</button>
+      <button class="fchip" data-v="hair">HAIR / AGA</button>
+      <button class="fchip" data-v="face">FACE</button>
+      <button class="fchip" data-v="eyes">EYES / ICL</button>
+      <button class="fchip" data-v="smile">SMILE</button>
+      <button class="fchip" data-v="body">BODY</button>
+      <button class="fchip" data-v="mens">MEN'S</button>
+    </div>
+
+    <div class="yt-grid" id="js-ytgrid"></div>
+
+    <p class="yt-note">
+      ※ 動画は各医療機関・医師がYouTubeで公開しているものを、学習用として紹介しています。内容は各チャンネルに帰属し、当サイトの広告掲載とは関係ありません。<br>
+      ※ 効果・経過には個人差があります。治療の判断は必ず医療機関での診察のうえで行ってください。
+    </p>
+  </div>
+</section>
+
+</main>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <nav class="footer-nav" aria-label="フッター">
+      <a href="shindan.html">悩み診断</a>
+      <a href="treatment-aga.html">施術を知る</a>
+      <a href="search.html">クリニック検索</a>
+      <a href="videos.html">映像で知る</a>
+      <a href="index.html#knowledge">読みもの</a>
+    </nav>
+    <div class="footer-base">
+      <span class="footer-logo">MELIORA</span>
+      <span>© MELIORA — 美容医療総合ガイド</span>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/main.js"></script>
+<script>
+(function(){
+  'use strict';
+  /* 実在の公開動画（oEmbedでタイトル・チャンネル確認済み 2026-09） */
+  var VIDEOS = [
+    {id:"JeNbkwgn83M",cat:"hair",t:"【諦めないで】薄毛・AGAの仕組みを医師監修で徹底解説",ch:"メディバリー大学病院／医師監修"},
+    {id:"YHrtPmUQyHo",cat:"hair",t:"AGAの原因と治療法を皮膚科専門医が教えます【男性型脱毛症】",ch:"日野皮フ科医院 公式チャンネル"},
+    {id:"iKIlEsTHBf8",cat:"face",t:"【二重埋没法】医師が順番に解説 〜二重の仕組みからダウンタイムまで〜",ch:"水の森美容クリニック【公式】"},
+    {id:"j2mlSNXlHek",cat:"face",t:"埋没法と全切開法のどちらを受けるべきか、症例写真とともに解説",ch:"もとび美容外科クリニック"},
+    {id:"9btHKLd16-Q",cat:"eyes",t:"眼科医が教えるICLの全て（検査・費用・リスク・レーシックとの違い）",ch:"眼科医 上月直之"},
+    {id:"ESkvuXpNbZE",cat:"eyes",t:"【ICL手術】近視・乱視矯正のICL治療（眼内コンタクトレンズ）を徹底解説",ch:"先進会眼科【公式】"},
+    {id:"ARPFxuEY4wI",cat:"smile",t:"インプラント治療の流れについて専門医が解説",ch:"岩元歯科クリニック守谷"},
+    {id:"eZKRNxuyGh0",cat:"smile",t:"詳しく知ろう、歯科インプラント治療（市民医療講座）",ch:"横浜市立大学附属市民総合医療センター"},
+    {id:"IgoV-ZFzen0",cat:"body",t:"【初心者向け】医療脱毛の正しい知識｜仕組み・効果・リスクを皮膚科医が説明",ch:"あつた皮ふ科・美容皮膚科クリニック"},
+    {id:"Ak7WxYNH_Ik",cat:"body",t:"皮膚科医が解説、医療脱毛 〜種類から副作用、クリニックの選び方まで〜",ch:"こばとも皮膚科"},
+    {id:"cpgSf14VoHY",cat:"mens",t:"【やる前に見て】メンズ脱毛について医師監修で解説",ch:"メディバリー大学病院／医師監修"},
+    {id:"ynZsD_yxe8I",cat:"mens",t:"皮膚科医が本当に正しいメンズスキンケアについて解説",ch:"友利新 公式チャンネル（内科・皮膚科医）"}
+  ];
+  var CATNAME = {hair:"HAIR / AGA",face:"FACE",eyes:"EYES / ICL",smile:"SMILE",body:"BODY",mens:"MEN'S"};
+  var grid = document.getElementById('js-ytgrid');
+  function esc(s){return s.replace(/[&<>"]/g,function(m){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[m]})}
+
+  function render(cat){
+    grid.innerHTML = VIDEOS.filter(function(v){return cat==='all'||v.cat===cat}).map(function(v){
+      return '<article class="yt" data-cat="'+v.cat+'">'
+        +'<div class="yt-frame"><button class="yt-thumb" type="button" data-id="'+v.id+'" aria-label="動画を再生: '+esc(v.t)+'">'
+        +'<img src="https://i.ytimg.com/vi/'+v.id+'/hqdefault.jpg" alt="" loading="lazy">'
+        +'<span class="yt-play" aria-hidden="true"></span></button></div>'
+        +'<p class="yt-cat">'+CATNAME[v.cat]+'</p>'
+        +'<h2 class="yt-title">'+esc(v.t)+'</h2>'
+        +'<p class="yt-ch">'+esc(v.ch)+'　·　<a href="https://www.youtube.com/watch?v='+v.id+'" target="_blank" rel="noopener" style="border-bottom:1px solid rgba(192,160,106,.5)">YouTubeで見る</a></p>'
+        +'</article>';
+    }).join('');
+  }
+  /* 再生は main.js の共通ライトエンベッドに委譲 */
+  var fl = document.querySelector('[data-group=vcat]');
+  fl.addEventListener('click', function(ev){
+    var b = ev.target.closest('.fchip'); if(!b) return;
+    fl.querySelectorAll('.fchip').forEach(function(x){x.classList.toggle('is-on', x===b)});
+    render(b.dataset.v);
+  });
+  render('all');
+})();
+</script>
+<script src="assets/chatbot.js"></script>
+</body>
+</html>

@@ -58,4 +58,17 @@
   document.querySelectorAll('a[href^="#"]').forEach(function(a){ a.addEventListener('click', function(ev){
     var id=a.getAttribute('href'); if(id.length<2) return; var el=document.querySelector(id); if(!el) return;
     ev.preventDefault(); var y=el.getBoundingClientRect().top+scrollY-64; scrollTo({top:y, behavior: reduce?'auto':'smooth'}); }); });
+
+  /* YouTubeライトエンベッド：クリックで初めてiframeを読み込む（全ページ共通） */
+  document.addEventListener('click', function(ev){
+    var b = ev.target.closest('.yt-thumb');
+    if (!b || !b.isConnected) return;
+    var f = b.parentElement;
+    var ifr = document.createElement('iframe');
+    ifr.src = 'https://www.youtube-nocookie.com/embed/' + b.dataset.id + '?autoplay=1&rel=0';
+    ifr.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
+    ifr.allowFullscreen = true;
+    ifr.title = b.getAttribute('aria-label') || '動画プレーヤー';
+    f.replaceChild(ifr, b);
+  });
 })();

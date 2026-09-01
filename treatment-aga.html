@@ -13,6 +13,7 @@
 </head>
 <body>
 <div class="bg-canvas" aria-hidden="true"></div>
+<div class="bg-aurora" aria-hidden="true"></div>
 <div class="bg-grain" aria-hidden="true"></div>
 
 <header class="header js-header">
@@ -21,6 +22,7 @@
     <a href="shindan.html">悩み診断</a>
     <a href="treatment-aga.html">施術を知る</a>
     <a href="search.html">クリニック検索</a>
+    <a href="videos.html">映像で知る</a>
     <a href="index.html#compare">比較する</a>
     <a href="index.html#knowledge">読みもの</a>
   </nav>
@@ -33,9 +35,9 @@
 <section class="page-hero section-dark section-dark--top" aria-label="AGA・薄毛治療ガイド">
   <div class="hero-visual" aria-hidden="true">
     <!-- 要差替: VIDEO 02 自然光が髪を横切るマクロ映像 -->
-    <div class="hero-film hero-settle" style="background:
-      linear-gradient(118deg, rgba(201,164,110,0) 34%, rgba(201,164,110,.24) 48%, rgba(214,182,132,.34) 52%, rgba(201,164,110,.20) 58%, rgba(201,164,110,0) 72%),
-      linear-gradient(160deg,#282420 0%,#161310 55%,#0e0c0a 100%)"></div>
+    <img class="hero-photo hero-settle" src="assets/img/hair.jpg" alt="" style="filter:grayscale(.4) saturate(.7) contrast(1.05) brightness(.65)">
+    <div class="hero-shade"></div>
+    <div class="light-drift hero-light" style="background:linear-gradient(118deg, rgba(201,164,110,0) 34%, rgba(201,164,110,.2) 48%, rgba(214,182,132,.28) 52%, rgba(201,164,110,.16) 58%, rgba(201,164,110,0) 72%)"></div>
     <div class="hero-vignette"></div>
   </div>
   <div class="inner">
@@ -269,6 +271,28 @@
   </div>
 </section>
 
+<!-- 映像で知る（AGA） -->
+<section id="movie-aga">
+  <div class="inner">
+    <p class="kicker reveal">Movie</p>
+    <h2 class="h2 reveal">Watch first.</h2>
+    <p class="h-ja reveal">映像で、全体像をつかむ。</p>
+    <div class="yt-grid stagger" style="grid-template-columns:repeat(2,1fr)">
+      <article class="yt" style="--i:0">
+        <div class="yt-frame"><button class="yt-thumb" type="button" data-id="JeNbkwgn83M" aria-label="動画を再生: 薄毛・AGAの仕組みを医師監修で徹底解説"><img src="https://i.ytimg.com/vi/JeNbkwgn83M/hqdefault.jpg" alt="" loading="lazy"><span class="yt-play" aria-hidden="true"></span></button></div>
+        <h3 class="yt-title">薄毛・AGAの仕組みを医師監修で徹底解説</h3>
+        <p class="yt-ch">メディバリー大学病院／医師監修</p>
+      </article>
+      <article class="yt" style="--i:1">
+        <div class="yt-frame"><button class="yt-thumb" type="button" data-id="YHrtPmUQyHo" aria-label="動画を再生: AGAの原因と治療法を皮膚科専門医が教えます"><img src="https://i.ytimg.com/vi/YHrtPmUQyHo/hqdefault.jpg" alt="" loading="lazy"><span class="yt-play" aria-hidden="true"></span></button></div>
+        <h3 class="yt-title">AGAの原因と治療法を皮膚科専門医が教えます</h3>
+        <p class="yt-ch">日野皮フ科医院 公式チャンネル</p>
+      </article>
+    </div>
+    <p class="yt-note">※ 各医療機関・医師がYouTubeで公開している動画を学習用として紹介しています。当サイトの広告掲載とは関係ありません。<a href="videos.html" style="border-bottom:1px solid rgba(192,160,106,.5)">映像ライブラリをすべて見る →</a></p>
+  </div>
+</section>
+
 <!-- FAQ -->
 <section id="faq">
   <div class="inner">
@@ -304,6 +328,7 @@
       <a href="shindan.html">悩み診断</a>
       <a href="treatment-aga.html">施術を知る</a>
       <a href="search.html">クリニック検索</a>
+      <a href="videos.html">映像で知る</a>
       <a href="index.html#compare">比較する</a>
       <a href="index.html#knowledge">読みもの</a>
     </nav>
@@ -317,5 +342,6 @@
 <div class="cta-fixed"><a class="btn" href="search.html?cat=aga">AGAのクリニックを探す</a></div>
 
 <script src="assets/main.js"></script>
+<script src="assets/chatbot.js"></script>
 </body>
 </html>

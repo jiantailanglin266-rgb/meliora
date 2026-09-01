@@ -453,3 +453,104 @@ a:hover .vis>.vis-core, .cat-card:hover .vis>.vis-core{transform:scale(1.06)} /*
 .review-card .rv-head{display:flex;justify-content:space-between;gap:10px;font-size:11.5px;letter-spacing:.12em;color:var(--ink-2);margin-bottom:12px}
 .review-card .rv-head b{font-weight:500;color:var(--ink)}
 .is-qa .page-hero{min-height:520px}
+
+/* =========================================================
+   PHASE 3 — 写真レイヤー（全画像に共通グレード＋カテゴリ別補正）
+   画像: Unsplash License（商用可・クレジット不要）
+   ========================================================= */
+.vis-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+  filter:grayscale(.4) saturate(.7) contrast(1.05) brightness(.85)}
+.vis-img--face{filter:grayscale(1) sepia(.3) saturate(.85) contrast(1.02) brightness(.78)}
+.vis-img--eyes{filter:grayscale(.6) saturate(.45) contrast(1.02) brightness(.62)}
+.vis-img--smile{filter:grayscale(.55) saturate(.5) contrast(1.02) brightness(.8)}
+.vis-img--body{filter:grayscale(.55) saturate(.5) sepia(.12) contrast(1.02) brightness(.72)}
+.vis-shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(18,17,20,.06) 30%,rgba(18,17,20,.68) 100%)}
+/* 写真カードでは従来の光グラデーションを screen 合成の「光」として重ねる */
+.vis--photo .vis-core{mix-blend-mode:screen;opacity:.85}
+
+.hero-photo{position:absolute;inset:-4% ;width:108%;height:108%;object-fit:cover;
+  filter:grayscale(.35) saturate(.7) contrast(1.06) brightness(.85)}
+.hero-shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(13,12,15,.3) 0%,rgba(13,12,15,.5) 55%,rgba(9,9,11,.82) 100%)}
+.hero-light{position:absolute;inset:0;mix-blend-mode:screen}
+
+/* =========================================================
+   PHASE 3 — 背景装飾（オーロラ光・金の環）
+   ========================================================= */
+.bg-aurora{position:fixed;inset:-22%;z-index:-1;pointer-events:none;opacity:.55;
+  background:
+    radial-gradient(36% 30% at 24% 32%, rgba(192,160,106,.11) 0%, rgba(192,160,106,0) 70%),
+    radial-gradient(42% 34% at 76% 64%, rgba(168,148,124,.09) 0%, rgba(168,148,124,0) 70%);
+  animation:aurora 52s ease-in-out infinite alternate}
+@keyframes aurora{from{transform:translate3d(-2%,-1.5%,0) scale(1)}to{transform:translate3d(2.5%,2%,0) scale(1.06)}}
+.ring{position:absolute;border-radius:50%;pointer-events:none;z-index:-1;
+  border:1px dashed rgba(192,160,106,.3);animation:ringSpin 140s linear infinite}
+.ring--solid{border-style:solid;border-color:rgba(192,160,106,.16);animation-duration:200s}
+@keyframes ringSpin{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion:reduce){.bg-aurora,.ring{animation:none!important}}
+.is-qa .bg-aurora,.is-qa .ring{animation:none!important}
+
+/* =========================================================
+   PHASE 3 — MOVIE（YouTube ライトエンベッド）
+   ========================================================= */
+.yt-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(18px,2.5vw,30px);margin-top:56px}
+@media (max-width:1023px){.yt-grid{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:600px){.yt-grid{grid-template-columns:1fr}}
+.yt{display:grid;gap:14px;align-content:start}
+.yt-frame{position:relative;aspect-ratio:16/9;overflow:hidden;border-radius:var(--radius);isolation:isolate;background:#0d0c0f}
+.yt-thumb{position:absolute;inset:0;width:100%;height:100%;display:block;border:0;padding:0;cursor:pointer;background:#0d0c0f}
+.yt-thumb img{width:100%;height:100%;object-fit:cover;filter:grayscale(.85) saturate(.6) contrast(1.03) brightness(.72);transition:transform 1600ms var(--ease),filter 900ms var(--ease)}
+.yt-thumb:hover img{transform:scale(1.03);filter:grayscale(.1) saturate(.85) contrast(1.03) brightness(.95)}
+.yt-thumb::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(13,12,15,.05) 55%,rgba(13,12,15,.55) 100%)}
+.yt-play{position:absolute;left:50%;top:50%;width:64px;height:64px;transform:translate(-50%,-50%);z-index:1;
+  border:1px solid rgba(238,233,223,.75);border-radius:50%;
+  background:rgba(13,12,15,.45);backdrop-filter:none;
+  transition:background 600ms var(--ease),border-color 600ms var(--ease)}
+.yt-play::before{content:"";position:absolute;left:53%;top:50%;transform:translate(-50%,-50%);
+  border-style:solid;border-width:9px 0 9px 15px;border-color:transparent transparent transparent rgba(238,233,223,.95)}
+.yt-thumb:hover .yt-play{background:rgba(192,160,106,.5);border-color:var(--gold)}
+.yt-frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.yt-title{font-family:var(--font-serif);font-size:14.5px;line-height:1.9;letter-spacing:.06em}
+.yt-ch{font-size:11px;letter-spacing:.12em;color:var(--ink-2)}
+.section-dark .yt-ch{color:var(--moon-2)}
+.yt-cat{font-family:var(--font-display);font-size:10.5px;letter-spacing:.3em;color:var(--gold);text-transform:uppercase}
+.yt-note{font-size:11.5px;color:var(--ink-2);line-height:2.1;letter-spacing:.05em;margin-top:28px}
+.yt-filter{display:flex;flex-wrap:wrap;gap:8px;margin-top:44px}
+
+/* =========================================================
+   PHASE 3 — コンシェルジュ・チャットボット
+   ========================================================= */
+.cb-fab{position:fixed;right:20px;bottom:20px;z-index:70;width:60px;height:60px;border-radius:50%;
+  border:1px solid rgba(var(--gold-rgb),.65);background:rgba(18,17,20,.92);color:var(--moon);cursor:pointer;
+  display:grid;place-items:center;transition:background 600ms var(--ease),transform 600ms var(--ease)}
+.cb-fab:hover{background:#1f1d22;transform:translateY(-2px)}
+.cb-fab .cb-ico{font-family:var(--font-display);font-size:20px;letter-spacing:0;color:var(--gold)}
+.cb-fab .cb-lbl{position:absolute;bottom:-20px;font-size:9px;letter-spacing:.2em;color:var(--ink-2);white-space:nowrap}
+@media (max-width:767px){.cb-fab{bottom:84px}}
+.cb-panel{position:fixed;right:20px;bottom:92px;z-index:71;width:min(360px,calc(100vw - 40px));
+  max-height:min(560px,calc(100vh - 130px));display:none;flex-direction:column;
+  background:#141317;color:var(--moon);border:1px solid rgba(var(--gold-rgb),.4);border-radius:6px;overflow:hidden;
+  box-shadow:0 24px 60px rgba(0,0,0,.45)}
+.cb-panel.is-open{display:flex}
+@media (max-width:767px){.cb-panel{bottom:156px}}
+.cb-head{padding:16px 20px;border-bottom:1px solid rgba(238,233,223,.12);display:flex;justify-content:space-between;align-items:baseline}
+.cb-head b{font-family:var(--font-display);font-weight:400;font-size:14px;letter-spacing:.28em}
+.cb-head span{font-size:10px;letter-spacing:.14em;color:var(--moon-2)}
+.cb-close{background:none;border:0;color:var(--moon-2);cursor:pointer;font-size:16px;padding:0 0 0 12px}
+.cb-body{flex:1;overflow-y:auto;padding:18px;display:grid;gap:12px;align-content:start}
+.cb-msg{max-width:86%;padding:12px 16px;font-size:12.5px;line-height:2;letter-spacing:.04em;border-radius:4px}
+.cb-msg--bot{background:#1d1b21;border:1px solid rgba(238,233,223,.08);justify-self:start}
+.cb-msg--user{background:rgba(var(--gold-rgb),.16);border:1px solid rgba(var(--gold-rgb),.3);justify-self:end}
+.cb-msg a{color:var(--gold);border-bottom:1px solid rgba(var(--gold-rgb),.5);padding-bottom:1px}
+.cb-quick{display:flex;flex-wrap:wrap;gap:8px;justify-self:start;max-width:100%}
+.cb-quick button{font-family:var(--font-body);font-size:11px;letter-spacing:.1em;color:var(--moon);
+  padding:8px 14px;border:1px solid rgba(238,233,223,.25);border-radius:999px;background:transparent;cursor:pointer;
+  transition:border-color 500ms var(--ease),background 500ms var(--ease)}
+.cb-quick button:hover{border-color:var(--gold);background:rgba(var(--gold-rgb),.12)}
+.cb-foot{border-top:1px solid rgba(238,233,223,.12);padding:12px;display:flex;gap:8px}
+.cb-foot input{flex:1;background:#1d1b21;border:1px solid rgba(238,233,223,.15);border-radius:4px;
+  color:var(--moon);font-family:var(--font-body);font-size:13px;padding:10px 14px;letter-spacing:.04em}
+.cb-foot input:focus{outline:none;border-color:rgba(var(--gold-rgb),.6)}
+.cb-foot button{font-family:var(--font-body);font-size:12px;letter-spacing:.1em;color:#171410;background:var(--gold);
+  border:0;border-radius:4px;padding:10px 18px;cursor:pointer;transition:opacity 500ms var(--ease)}
+.cb-foot button:hover{opacity:.85}
+.cb-note{font-size:9.5px;color:var(--moon-2);letter-spacing:.06em;padding:0 14px 12px;line-height:1.8}

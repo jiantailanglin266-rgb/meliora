@@ -554,3 +554,96 @@ a:hover .vis>.vis-core, .cat-card:hover .vis>.vis-core{transform:scale(1.06)} /*
   border:0;border-radius:4px;padding:10px 18px;cursor:pointer;transition:opacity 500ms var(--ease)}
 .cb-foot button:hover{opacity:.85}
 .cb-note{font-size:9.5px;color:var(--moon-2);letter-spacing:.06em;padding:0 14px 12px;line-height:1.8}
+
+/* =========================================================
+   LIGHT THEME — 白基調・明るいトーンへの全面転換（後勝ち上書き）
+   ダークに戻す場合はこのブロックを削除する
+   ========================================================= */
+:root{
+  --moon:#26241f;          /* 旧・濃色地の文字 → ink と同化 */
+  --moon-2:#6d685e;
+  --ivory:#fbfaf7;
+  --ivory-2:#f4f1ea;
+}
+.bg-canvas{background:
+  radial-gradient(120% 60% at 50% -10%, #ffffff 0%, rgba(255,255,255,0) 60%),
+  radial-gradient(90% 55% at 106% 40%, #f6f2ea 0%, rgba(246,242,234,0) 58%),
+  radial-gradient(80% 55% at -6% 72%, #f8f5ee 0%, rgba(248,245,238,0) 60%),
+  linear-gradient(180deg, #fbfaf7 0%, #f6f3ed 48%, #faf8f3 100%)}
+.bg-aurora{opacity:.7}
+
+/* 濃色バンドを全廃 — ページ全体を1枚の白いキャンバスに */
+.section-dark::before,.section-dark--top::before,.section-dark--bottom::before{display:none}
+.section-dark{color:var(--ink)}
+.section-dark .lead{color:var(--ink-2)}
+
+/* ヘッダー・ローディング */
+.header{background:rgba(251,250,247,.6);color:var(--ink)}
+.header.on-light{background:rgba(251,250,247,.6);color:var(--ink)}
+#loading{background:#fbfaf7}
+#loading .word{color:var(--ink)}
+
+/* ヒーロー: 写真の上に白のベールを重ね、光で満たす */
+.hero-shade{background:linear-gradient(90deg, rgba(251,250,247,.96) 0%, rgba(251,250,247,.8) 40%, rgba(251,250,247,.38) 72%, rgba(251,250,247,.16) 100%)}
+.hero-vignette{background:radial-gradient(130% 100% at 50% 40%, rgba(251,250,247,0) 44%, rgba(251,250,247,.66) 100%)}
+.hero-photo{filter:grayscale(.3) saturate(.78) contrast(1.02) brightness(1.04)}
+@media (max-width:767px){
+  .hero-shade{background:linear-gradient(180deg, rgba(251,250,247,.94) 0%, rgba(251,250,247,.72) 55%, rgba(251,250,247,.4) 100%)}
+}
+
+/* カテゴリーカード: 白いギャラリーに掛かる陰影写真（ラベルは写真上なので白のまま） */
+.vis-img{filter:grayscale(.35) saturate(.75) contrast(1.03) brightness(.98)}
+.cat-card{color:#f6f3ec}
+.cat-card .cat-label .ja{color:rgba(246,243,236,.72)}
+.men-visual{color:#f6f3ec}
+
+/* 罫線・ボーダーをライト地用に */
+.breadcrumb a{border-bottom-color:rgba(38,36,31,.25)}
+.men-list{border-top-color:rgba(38,36,31,.12)}
+.men-list a{border-bottom-color:rgba(38,36,31,.12)}
+.men-list .arrow{color:var(--ink-2)}
+.men-words{color:var(--ink-2)}
+.toc a{border-color:rgba(38,36,31,.18);color:var(--ink-2)}
+.toc a:hover{border-color:var(--gold);color:#8a6f3e}
+.yt-ch{color:var(--ink-2)}
+
+/* フッター: 淡いウォームグレーの帯 */
+.footer{color:var(--ink-2)}
+.footer::before{background:linear-gradient(180deg, rgba(240,237,230,0) 0%, rgba(240,237,230,.7) 120px, #f0ede6 240px, #f0ede6 100%)}
+.footer-policy{border-color:rgba(38,36,31,.14)}
+.footer-policy strong{color:var(--ink)}
+.footer-logo{color:var(--ink)}
+
+/* モバイル固定CTA */
+@media (max-width:767px){
+  .cta-fixed .btn{background:rgba(251,250,247,.95);color:var(--ink);border-color:rgba(192,160,106,.6)}
+}
+
+/* チャットボット: ライトパネル */
+.cb-fab{background:rgba(255,255,255,.94);color:var(--ink);border-color:rgba(192,160,106,.7);
+  box-shadow:0 10px 30px rgba(38,36,31,.12)}
+.cb-fab:hover{background:#ffffff}
+.cb-panel{background:#ffffff;color:var(--ink);border-color:rgba(192,160,106,.4);
+  box-shadow:0 24px 60px rgba(38,36,31,.16)}
+.cb-head{border-bottom-color:rgba(38,36,31,.1)}
+.cb-head span{color:var(--ink-2)}
+.cb-close{color:var(--ink-2)}
+.cb-msg--bot{background:#f6f3ed;border-color:rgba(38,36,31,.06)}
+.cb-msg--user{background:rgba(192,160,106,.14);border-color:rgba(192,160,106,.35)}
+.cb-msg a{color:#8a6f3e}
+.cb-quick button{color:var(--ink);border-color:rgba(38,36,31,.2)}
+.cb-quick button:hover{border-color:var(--gold);background:rgba(192,160,106,.1)}
+.cb-foot{border-top-color:rgba(38,36,31,.1)}
+.cb-foot input{background:#f8f6f1;border-color:rgba(38,36,31,.15);color:var(--ink)}
+.cb-note{color:var(--ink-2)}
+
+/* LIGHT THEME 追補: カード額装・カテゴリ別フィルタ再定義・写真下端の溶け込み */
+.vis{-webkit-mask-image:none;mask-image:none;border-radius:3px}
+.vis-shade{background:linear-gradient(180deg,rgba(18,17,20,.05) 30%,rgba(18,17,20,.74) 100%)}
+.cat-label{text-shadow:0 1px 14px rgba(10,10,12,.5)}
+.vis-img--face{filter:grayscale(1) sepia(.28) saturate(.9) contrast(1.0) brightness(.92)}
+.vis-img--eyes{filter:grayscale(.68) saturate(.4) contrast(1.0) brightness(.8)}
+.vis-img--smile{filter:grayscale(.5) saturate(.6) contrast(1.0) brightness(.95)}
+.vis-img--body{filter:grayscale(.62) saturate(.42) sepia(.1) contrast(1.0) brightness(.82)}
+.hero-visual::after{content:"";position:absolute;left:0;right:0;bottom:0;height:200px;z-index:1;pointer-events:none;
+  background:linear-gradient(0deg,#fbfaf7 0%,rgba(251,250,247,0) 100%)}

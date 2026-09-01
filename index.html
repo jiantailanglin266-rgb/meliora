@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- MELIORA（メリオラ）: ラテン語「より良きものへ」。本番ドメイン meliora.jp は取得可否確認のうえ差替 -->
+<title>MELIORA｜美しさに、正しい選択肢を。美容医療総合ガイド</title>
+<meta name="description" content="髪、肌、目、歯、身体。美容医療の選択肢を知り、比べ、自分で選ぶための総合ガイド。治療の仕組み・費用・リスク・ダウンタイムを整理し、全国主要都市のクリニックを比較検討できます。">
+<link rel="canonical" href="https://example.com/"><!-- 要差替: 本番URL（meliora.jp 取得後） -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="MELIORA｜美しさに、正しい選択肢を。">
+<meta property="og:description" content="知る。比べる。そして、自分で選ぶ。美容医療総合ガイド。">
+<meta property="og:url" content="https://example.com/"><!-- 要差替 -->
+<meta property="og:image" content="https://example.com/ogp.jpg"><!-- 要差替 -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Noto+Serif+JP:wght@300;400;500&family=Noto+Sans+JP:wght@300;400;500&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebSite","name":"MELIORA","url":"https://example.com/","description":"美容医療の選択肢を知り、比べ、自分で選ぶための総合ガイド。","inLanguage":"ja","publisher":{"@type":"Organization","name":"MELIORA編集部"}}
+</script>
+<style>
+/* =========================================================
+   0. トークン
+   Black / Charcoal / Warm Ivory / Stone Gray / Champagne Gold
+   ========================================================= */
+:root{
+  --font-display:"Cormorant Garamond","Times New Roman",serif;
+  --font-serif:"Noto Serif JP","Hiragino Mincho ProN",serif;
+  --font-body:"Noto Sans JP","Hiragino Sans","Yu Gothic",sans-serif;
+
+  --ivory:#f2ede3;          /* Warm Ivory: ページ地（.bg-canvas 中心色と一致） */
+  --ivory-2:#ece6d9;
+  --ink:#26241f;            /* アイボリー地の文字 */
+  --ink-2:#6d685e;          /* Stone Gray 系 */
+  --dark:#121114;           /* Black / Charcoal */
+  --dark-2:#1a181c;
+  --moon:#eee9df;           /* 濃色地の文字 */
+  --moon-2:#a29d92;
+  --gold:#c0a06a;           /* Champagne Gold: 極少量 */
+  --gold-rgb:192,160,106;
+
+  --ease:cubic-bezier(.22,1,.36,1);
+  --dur:1100ms;
+  --stagger:80ms;
+  --radius:2px;
+  --max:1180px;
+  --gutter:clamp(20px,5vw,72px);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;overflow-x:clip}
+body{
+  font-family:var(--font-body);font-weight:300;color:var(--ink);background:transparent;
+  line-height:2;letter-spacing:.04em;font-feature-settings:"palt";
+  overflow-x:hidden;
+}
+img{max-width:100%;height:auto;display:block}
+a{color:inherit;text-decoration:none}
+ul{list-style:none}
+::selection{background:rgba(var(--gold-rgb),.25)}
+
+/* =========================================================
+   処方A — ページ全体を1枚の連続背景（Warm Ivory基調）
+   ========================================================= */
+.bg-canvas{position:fixed;inset:0;z-index:-2;pointer-events:none;
+  background:
+    radial-gradient(120% 60% at 50% -10%, #f7f3ea 0%, rgba(247,243,234,0) 60%),
+    radial-gradient(90% 55% at 106% 40%, #ede6d7 0%, rgba(237,230,215,0) 58%),
+    radial-gradient(80% 55% at -6% 72%, #f0ebe0 0%, rgba(240,235,224,0) 60%),
+    linear-gradient(180deg, #f2ede3 0%, #eee8dc 48%, #f1ebdf 100%);
+}
+/* 処方B — SVGグレイン（フィルム粒子）でバンディング撹拌 */
+.bg-grain{position:fixed;inset:0;z-index:60;pointer-events:none;opacity:.042;mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size:200px 200px;}
+section{background:transparent;position:relative;padding:clamp(88px,12vw,168px) var(--gutter)}
+.inner{max-width:var(--max);margin:0 auto;position:relative}
+
+/* 処方C — 濃色セクションは ±240px・3ストップの移行帯で溶かす */
+.section-dark{color:var(--moon);isolation:isolate}
+.section-dark::before{content:"";position:absolute;inset:-240px 0;z-index:-1;
+  background:linear-gradient(180deg, rgba(18,17,20,0) 0%, rgba(18,17,20,.55) 120px, var(--dark) 240px, var(--dark) calc(100% - 240px), rgba(18,17,20,.55) calc(100% - 120px), rgba(18,17,20,0) 100%);}
+.section-dark--top::before{inset:0 0 -240px 0;
+  background:linear-gradient(180deg, var(--dark) 0%, var(--dark) calc(100% - 240px), rgba(18,17,20,.55) calc(100% - 120px), rgba(18,17,20,0) 100%);}
+.section-dark--bottom::before{inset:-240px 0 0 0;
+  background:linear-gradient(180deg, rgba(18,17,20,0) 0%, rgba(18,17,20,.55) 120px, var(--dark) 240px, var(--dark) 100%);}
+.hairline{height:1px;opacity:.55;margin:0 var(--gutter);
+  background:linear-gradient(90deg, transparent, rgba(var(--gold-rgb),.35), transparent)}
+
+/* =========================================================
+   処方D — ビジュアルの馴染ませ（共通グレード＋マスクフェード）
+   ここでは写真の代わりに「光と影」の抽象グラデーションを使用。
+   実写・映像差替時は同一クラスをそのまま適用すること。
+   ========================================================= */
+.vis{position:relative;isolation:isolate;overflow:hidden;border-radius:var(--radius);
+  -webkit-mask-image:linear-gradient(180deg,transparent,#000 9%,#000 91%,transparent),linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent);
+  mask-image:linear-gradient(180deg,transparent,#000 9%,#000 91%,transparent),linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent);
+  -webkit-mask-composite:source-in;mask-composite:intersect;}
+.vis>.vis-core{position:absolute;inset:0;transform:scale(1.04);
+  transition:transform 1600ms var(--ease);
+  filter:saturate(.9) contrast(1.03) brightness(1.02);}
+.vis::after{content:"";position:absolute;inset:0;pointer-events:none;mix-blend-mode:multiply;
+  background:linear-gradient(180deg, rgba(18,17,20,.06), rgba(18,17,20,.18))}
+a:hover .vis>.vis-core, .cat-card:hover .vis>.vis-core{transform:scale(1.06)} /* ホバー約2%のみ */
+
+/* 光と影の抽象ビジュアル（要差替: 実写映像/写真。VIDEO 01〜08 対応をコメントで明記） */
+.vis--hair .vis-core{background:
+  linear-gradient(118deg, rgba(201,164,110,0) 30%, rgba(201,164,110,.30) 46%, rgba(214,182,132,.44) 52%, rgba(201,164,110,.26) 58%, rgba(201,164,110,0) 74%),
+  radial-gradient(120% 80% at 20% 96%, #1f1b17 0%, rgba(31,27,23,0) 70%),
+  linear-gradient(160deg,#282420 0%,#161310 55%,#0e0c0a 100%)}
+.vis--face .vis-core{background:
+  radial-gradient(46% 120% at 24% 40%, rgba(224,200,172,.30) 0%, rgba(224,200,172,.10) 44%, rgba(224,200,172,0) 68%),
+  radial-gradient(90% 90% at 90% 92%, #15131a 0%, rgba(21,19,26,0) 70%),
+  linear-gradient(200deg,#232028 0%,#131116 60%,#0d0c10 100%)}
+.vis--eyes .vis-core{background:
+  radial-gradient(44% 7% at 52% 48%, rgba(216,228,234,.42) 0%, rgba(196,212,222,.16) 55%, rgba(196,212,222,0) 100%),
+  radial-gradient(60% 34% at 55% 52%, rgba(178,198,210,.15) 0%, rgba(178,198,210,0) 62%),
+  linear-gradient(170deg,#1b1f24 0%,#101318 60%,#0b0d10 100%)}
+.vis--smile .vis-core{background:
+  radial-gradient(70% 42% at 50% 72%, rgba(230,207,180,.32) 0%, rgba(230,207,180,.10) 46%, rgba(230,207,180,0) 66%),
+  linear-gradient(190deg,#272220 0%,#151210 62%,#0d0b0a 100%)}
+.vis--body .vis-core{background:
+  radial-gradient(9% 46% at 64% 46%, rgba(216,210,198,.34) 0%, rgba(210,203,190,.14) 55%, rgba(210,203,190,0) 100%),
+  radial-gradient(34% 60% at 60% 50%, rgba(210,203,190,.10) 0%, rgba(210,203,190,0) 62%),
+  linear-gradient(150deg,#211f20 0%,#131213 58%,#0c0c0d 100%)}
+.vis--men .vis-core{background:
+  linear-gradient(105deg, rgba(18,17,20,0) 44%, rgba(190,168,128,.22) 50%, rgba(18,17,20,0) 56%),
+  radial-gradient(80% 80% at 20% 20%, #1c1a1e 0%, rgba(28,26,30,0) 70%),
+  linear-gradient(180deg,#19171b 0%,#100f12 60%,#0c0b0d 100%)}
+.vis--clinic .vis-core{background:
+  linear-gradient(90deg, rgba(226,210,184,.2) 0%, rgba(226,210,184,0) 30%),
+  radial-gradient(70% 60% at 80% 30%, rgba(210,190,158,.18) 0%, rgba(210,190,158,0) 60%),
+  linear-gradient(175deg,#242019 0%,#141210 62%,#0e0d0b 100%)}
+
+/* =========================================================
+   処方E — モーション（ゆっくり像を結ぶ）
+   ========================================================= */
+@keyframes reveal{from{opacity:0;transform:translateY(26px) scale(.988);filter:blur(7px)}to{opacity:1;transform:none;filter:blur(0)}}
+.reveal{animation:reveal var(--dur) var(--ease) both;animation-play-state:paused}
+.reveal.is-in{animation-play-state:running}
+.stagger>*{animation:reveal var(--dur) var(--ease) both;animation-play-state:paused;animation-delay:calc(var(--i,0)*var(--stagger))}
+.stagger.is-in>*{animation-play-state:running}
+
+/* キー演出（1サイト1つ）: 「光がゆっくり差す」ライトドリフト
+   コンセプト「選ぶ＝暗がりの中から、自分の輪郭が静かに現れる」の翻訳 */
+@keyframes lightDrift{
+  0%{transform:translate3d(-6%, -3%, 0) scale(1)}
+  50%{transform:translate3d(5%, 3%, 0) scale(1.06)}
+  100%{transform:translate3d(-6%, -3%, 0) scale(1)}
+}
+.light-drift{animation:lightDrift 36s ease-in-out infinite;will-change:transform}
+@keyframes heroSettle{from{transform:scale(1.08)}to{transform:scale(1.02)}}
+.hero-settle{animation:heroSettle 3200ms var(--ease) both}
+
+/* 検証用QAモード（?qa=1）: モーションを即完了させて全要素を表示 */
+.is-qa .reveal,.is-qa .stagger>*{animation:none!important;opacity:1!important;transform:none!important;filter:none!important}
+.is-qa #loading{display:none}
+.is-qa .light-drift,.is-qa .hero-settle{animation:none!important}
+.is-qa .hero{min-height:860px}
+.is-qa .final{min-height:760px}
+@media (prefers-reduced-motion:reduce){
+  .reveal,.stagger>*{animation:none!important;opacity:1!important;transform:none!important;filter:none!important}
+  .light-drift,.hero-settle{animation:none!important}
+  .js-parallax{transform:none!important}
+  html{scroll-behavior:auto}
+  #loading{display:none}
+}
+
+/* =========================================================
+   1. ローディング — 暗幕にブランド名と金の水平線（1.2秒以内に開幕）
+   ========================================================= */
+#loading{position:fixed;inset:0;z-index:100;background:var(--dark);display:grid;place-items:center;
+  transition:opacity 800ms var(--ease),visibility 0s 800ms}
+#loading.is-done{opacity:0;visibility:hidden}
+#loading .word{font-family:var(--font-display);font-size:clamp(26px,4.4vw,52px);letter-spacing:.34em;color:var(--moon);display:flex;overflow:hidden;padding-left:.34em}
+#loading .word span{display:inline-block;transform:translateY(120%);animation:rise 900ms var(--ease) forwards;animation-delay:calc(var(--i)*55ms)}
+@keyframes rise{to{transform:none}}
+#loading .line{width:min(48vw,320px);height:1px;margin-top:26px;transform:scaleX(0);
+  background:linear-gradient(90deg,transparent,rgba(var(--gold-rgb),.8),transparent);
+  animation:lineGrow 900ms var(--ease) 300ms forwards}
+@keyframes lineGrow{to{transform:scaleX(1)}}
+
+/* =========================================================
+   2. ヘッダー（backdrop-filter はここ1箇所のみ）
+   ========================================================= */
+.header{position:fixed;top:0;left:0;right:0;z-index:50;display:flex;align-items:center;justify-content:space-between;
+  padding:16px var(--gutter);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  background:rgba(18,17,20,.42);color:var(--moon);
+  transition:background 800ms var(--ease)}
+.header.on-light{background:rgba(242,237,227,.6);color:var(--ink)}
+.header .logo{font-family:var(--font-display);font-size:21px;letter-spacing:.3em;padding-left:.3em}
+.nav{display:flex;gap:30px;font-size:12px;letter-spacing:.16em}
+.nav a{position:relative;padding:4px 0;opacity:.85}
+.nav a::after{content:"";position:absolute;left:0;bottom:0;height:1px;width:100%;background:currentColor;transform:scaleX(0);transform-origin:right;transition:transform 600ms var(--ease)}
+.nav a:hover::after{transform:scaleX(1);transform-origin:left}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:14px 30px;border:1px solid rgba(var(--gold-rgb),.55);border-radius:999px;
+  font-size:13px;letter-spacing:.14em;color:inherit;
+  transition:background 700ms var(--ease),color 700ms var(--ease),border-color 700ms var(--ease)}
+.btn:hover{background:var(--gold);border-color:var(--gold);color:#171410}
+.btn--solid{background:rgba(var(--gold-rgb),.14)}
+.header .btn{padding:10px 22px;font-size:12px}
+@media (max-width:900px){.nav{display:none}}
+
+/* =========================================================
+   3. 見出し — 欧文ディスプレイ × 和文明朝の2層
+   ========================================================= */
+.h-display{font-family:var(--font-display);font-weight:400;line-height:1.02;letter-spacing:.04em;font-size:clamp(46px,8.4vw,124px)}
+.h2{font-family:var(--font-display);font-weight:400;font-size:clamp(34px,4.6vw,64px);line-height:1.08;letter-spacing:.05em}
+.h-ja{font-family:var(--font-serif);font-weight:400;font-size:clamp(19px,2.3vw,27px);line-height:1.9;letter-spacing:.12em;margin-top:16px}
+.kicker{font-family:var(--font-display);font-size:12px;letter-spacing:.42em;color:var(--gold);margin-bottom:22px;text-transform:uppercase}
+.lead{font-size:clamp(14px,1.35vw,16px);line-height:2.4;max-width:38em;color:var(--ink-2)}
+.section-dark .lead{color:var(--moon-2)}
+.bgword{position:absolute;z-index:-1;font-family:var(--font-display);font-weight:400;line-height:1;
+  font-size:clamp(120px,22vw,340px);letter-spacing:.02em;opacity:.05;pointer-events:none;user-select:none;white-space:nowrap}
+@media (max-width:767px){.bgword{display:none}}
+
+/* =========================================================
+   4. HERO — シネマティック（キー演出の在り処）
+   ========================================================= */
+.hero{min-height:100svh;display:grid;align-content:end;padding-bottom:clamp(72px,10vh,120px);overflow:clip}
+.hero-visual{position:absolute;inset:0;z-index:-1;overflow:hidden}
+/* 要差替: VIDEO 01（男女の静かなポートレート/24fps/slow dolly）。
+   <video autoplay muted loop playsinline poster="..."> を .hero-film に置き、
+   filter・vignette はそのまま適用する */
+.hero-film{position:absolute;inset:-8%;filter:saturate(.9) contrast(1.05) brightness(.98);
+  background:
+    radial-gradient(52% 66% at 66% 40%, rgba(214,186,150,.30) 0%, rgba(214,186,150,0) 58%),
+    radial-gradient(40% 52% at 30% 56%, rgba(180,168,158,.16) 0%, rgba(180,168,158,0) 60%),
+    radial-gradient(120% 100% at 50% 118%, #060608 12%, rgba(6,6,8,0) 62%),
+    linear-gradient(165deg, #232028 0%, #17151a 46%, #0d0c0f 100%);}
+.hero-vignette{position:absolute;inset:0;background:radial-gradient(120% 90% at 50% 42%, rgba(6,6,8,0) 46%, rgba(6,6,8,.55) 100%)}
+.hero .inner{width:100%}
+.hero-copy h1{font-family:var(--font-serif);font-weight:400;color:var(--moon);
+  font-size:clamp(30px,4.8vw,58px);line-height:1.7;letter-spacing:.14em}
+.hero-en{font-family:var(--font-display);color:var(--moon);opacity:.6;font-size:clamp(12px,1.2vw,14px);letter-spacing:.5em;margin-bottom:26px;text-transform:uppercase}
+.hero-sub{margin-top:26px;color:var(--moon-2);font-size:clamp(13px,1.3vw,15px);line-height:2.3;letter-spacing:.08em}
+@media (max-width:600px){.hero-sub br{display:none}.hero-sub{max-width:34em}}
+.hero-cta{display:flex;flex-wrap:wrap;gap:14px;margin-top:44px;color:var(--moon)}
+.hero-scroll{position:absolute;right:var(--gutter);bottom:36px;display:flex;align-items:center;gap:14px;
+  color:var(--moon-2);font-size:10px;letter-spacing:.4em;writing-mode:vertical-rl}
+.hero-scroll::after{content:"";width:1px;height:64px;background:linear-gradient(180deg,rgba(var(--gold-rgb),.7),transparent)}
+
+/* =========================================================
+   5. カテゴリー — 人物の一部を切り取るシネマティックカード
+   ========================================================= */
+.cat-grid{display:grid;gap:clamp(14px,1.8vw,22px);grid-template-columns:repeat(3,1fr);margin-top:64px}
+@media (max-width:1023px){.cat-grid{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:600px){.cat-grid{grid-template-columns:1fr}}
+.cat-card{position:relative;display:block;aspect-ratio:4/5;color:var(--moon)}
+@media (max-width:600px){.cat-card{aspect-ratio:16/10}}
+.cat-card .vis{position:absolute;inset:0}
+.cat-card .cat-label{position:absolute;left:26px;bottom:24px;z-index:1;
+  transform:translateY(6px);transition:transform 900ms var(--ease)}
+.cat-card:hover .cat-label{transform:none}
+.cat-label .en{font-family:var(--font-display);font-size:clamp(24px,2.4vw,32px);letter-spacing:.2em}
+.cat-label .ja{display:block;font-size:11.5px;letter-spacing:.14em;color:var(--moon-2);margin-top:8px;
+  opacity:0;transform:translateY(8px);transition:opacity 900ms var(--ease),transform 900ms var(--ease)}
+.cat-card:hover .cat-label .ja{opacity:1;transform:none}
+.cat-card .cat-line{position:absolute;left:26px;bottom:14px;height:1px;width:34px;background:rgba(var(--gold-rgb),.7);
+  transform:scaleX(0);transform-origin:left;transition:transform 900ms var(--ease)}
+.cat-card:hover .cat-line{transform:scaleX(1)}
+
+/* =========================================================
+   6. 悩みから探す（Warm Ivoryゾーン）
+   ========================================================= */
+.concern-list{display:grid;grid-template-columns:repeat(2,1fr);gap:0;margin-top:56px;border-top:1px solid rgba(38,36,31,.1)}
+@media (max-width:767px){.concern-list{grid-template-columns:1fr}}
+.concern-list a{display:flex;align-items:baseline;justify-content:space-between;gap:16px;
+  padding:26px 10px;border-bottom:1px solid rgba(38,36,31,.1);
+  font-family:var(--font-serif);font-size:clamp(16px,1.7vw,20px);letter-spacing:.1em;
+  transition:padding 700ms var(--ease),color 700ms var(--ease)}
+.concern-list a:hover{padding-left:20px;color:#8a6f3e}
+.concern-list a .tag{font-family:var(--font-display);font-size:11px;letter-spacing:.3em;color:var(--ink-2);white-space:nowrap}
+
+/* =========================================================
+   7. 治療ガイド（編集方針）
+   ========================================================= */
+.guide-grid{display:grid;grid-template-columns:5fr 7fr;gap:clamp(32px,5vw,80px);margin-top:64px;align-items:start}
+@media (max-width:900px){.guide-grid{grid-template-columns:1fr}}
+.guide-items{display:grid;grid-template-columns:repeat(2,1fr);gap:0;border-top:1px solid rgba(38,36,31,.1);counter-reset:gi}
+.guide-items li{counter-increment:gi;padding:18px 8px;border-bottom:1px solid rgba(38,36,31,.1);
+  font-size:13.5px;letter-spacing:.08em;display:flex;gap:14px;align-items:baseline}
+.guide-items li::before{content:counter(gi,decimal-leading-zero);font-family:var(--font-display);font-size:12px;color:var(--gold);letter-spacing:.1em}
+@media (max-width:600px){.guide-items{grid-template-columns:1fr}}
+.note-frame{border:1px solid rgba(var(--gold-rgb),.4);padding:clamp(24px,3vw,40px);font-size:13px;line-height:2.2;color:var(--ink-2);letter-spacing:.06em}
+.note-frame strong{font-weight:500;color:var(--ink);display:block;margin-bottom:10px;font-family:var(--font-serif);letter-spacing:.12em}
+
+/* =========================================================
+   8. クリニック検索
+   ========================================================= */
+.area-grid{display:grid;grid-template-columns:repeat(5,1fr);margin-top:56px;border-top:1px solid rgba(38,36,31,.1);border-left:1px solid rgba(38,36,31,.1)}
+@media (max-width:767px){.area-grid{grid-template-columns:repeat(2,1fr)}}
+.area-grid a{display:grid;place-items:center;gap:2px;padding:30px 8px;
+  border-right:1px solid rgba(38,36,31,.1);border-bottom:1px solid rgba(38,36,31,.1);
+  transition:background 700ms var(--ease)}
+.area-grid a:hover{background:rgba(var(--gold-rgb),.08)}
+.area-grid .en{font-family:var(--font-display);font-size:15px;letter-spacing:.24em}
+.area-grid .ja{font-size:11px;letter-spacing:.2em;color:var(--ink-2)}
+.filter-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:34px}
+.chip{font-size:12px;letter-spacing:.12em;padding:10px 20px;border:1px solid rgba(38,36,31,.18);border-radius:999px;
+  transition:border-color 600ms var(--ease),color 600ms var(--ease)}
+.chip:hover{border-color:var(--gold);color:#8a6f3e}
+
+/* =========================================================
+   9. 比較テーブル
+   ========================================================= */
+.cmp-wrap{margin-top:56px;overflow-x:auto;-webkit-overflow-scrolling:touch}
+.cmp{width:100%;min-width:760px;border-collapse:collapse;font-size:13px;letter-spacing:.04em}
+.cmp th,.cmp td{padding:18px 16px;text-align:left;vertical-align:top;border-bottom:1px solid rgba(38,36,31,.1);line-height:1.9}
+.cmp thead th{font-family:var(--font-serif);font-weight:400;font-size:14.5px;letter-spacing:.1em;border-bottom:1px solid rgba(38,36,31,.28)}
+.cmp tbody th{font-weight:400;color:var(--ink-2);font-size:12px;letter-spacing:.14em;white-space:nowrap;width:9em}
+.pr-badge{display:inline-block;font-size:10px;letter-spacing:.2em;color:var(--ink-2);border:1px solid rgba(38,36,31,.25);
+  border-radius:2px;padding:2px 8px;margin-left:10px;vertical-align:middle}
+.cmp .link{border-bottom:1px solid rgba(var(--gold-rgb),.6);padding-bottom:2px;font-size:12.5px;letter-spacing:.08em;transition:color 600ms var(--ease)}
+.cmp .link:hover{color:#8a6f3e}
+.cmp-note{font-size:11.5px;color:var(--ink-2);margin-top:20px;line-height:2.1;letter-spacing:.05em}
+
+/* =========================================================
+   10. FOR MEN（濃色バンド）
+   ========================================================= */
+.men-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(32px,5vw,80px);margin-top:64px;align-items:center}
+@media (max-width:900px){.men-grid{grid-template-columns:1fr}}
+.men-visual{aspect-ratio:4/5;position:relative}
+@media (max-width:900px){.men-visual{aspect-ratio:16/10}}
+.men-list{border-top:1px solid rgba(238,233,223,.14)}
+.men-list a{display:flex;justify-content:space-between;align-items:baseline;gap:16px;padding:22px 8px;
+  border-bottom:1px solid rgba(238,233,223,.14);font-family:var(--font-serif);font-size:16px;letter-spacing:.1em;
+  transition:padding 700ms var(--ease),color 700ms var(--ease)}
+.men-list a:hover{padding-left:18px;color:var(--gold)}
+.men-list .arrow{font-family:var(--font-display);font-size:13px;color:var(--moon-2)}
+.men-words{display:flex;gap:clamp(20px,4vw,48px);margin-top:40px;font-family:var(--font-display);
+  font-size:12px;letter-spacing:.4em;color:var(--moon-2)}
+
+/* =========================================================
+   11. KNOWLEDGE — マガジン
+   ========================================================= */
+.mag-list{margin-top:56px;border-top:1px solid rgba(38,36,31,.1)}
+.mag-list article{border-bottom:1px solid rgba(38,36,31,.1)}
+.mag-list a{display:grid;grid-template-columns:9em 1fr auto;gap:clamp(16px,3vw,48px);align-items:baseline;
+  padding:30px 8px;transition:background 700ms var(--ease)}
+.mag-list a:hover{background:rgba(var(--gold-rgb),.06)}
+@media (max-width:767px){.mag-list a{grid-template-columns:1fr;gap:8px}}
+.mag-cat{font-family:var(--font-display);font-size:11px;letter-spacing:.3em;color:var(--gold);text-transform:uppercase}
+.mag-title{font-family:var(--font-serif);font-size:clamp(16px,1.8vw,20px);letter-spacing:.08em;line-height:1.8}
+.mag-meta{font-size:11px;color:var(--ink-2);letter-spacing:.1em;white-space:nowrap}
+
+/* =========================================================
+   12. 最終CTA・フッター
+   ========================================================= */
+.final{min-height:88svh;display:grid;place-items:center;text-align:center;overflow:clip}
+.final-visual{position:absolute;inset:0;z-index:-1;overflow:hidden}
+/* 要差替: VIDEO 08（男女が都市へ歩き出す後ろ姿・カメラは後方へ引く） */
+.final-film{position:absolute;inset:-8%;filter:saturate(.88) contrast(1.05) brightness(.96);
+  background:
+    linear-gradient(180deg, rgba(214,186,150,.14) 0%, rgba(214,186,150,0) 34%),
+    radial-gradient(50% 62% at 50% 38%, rgba(196,178,152,.20) 0%, rgba(196,178,152,0) 60%),
+    linear-gradient(180deg,#1b191d 0%,#121114 52%,#0b0a0c 100%);}
+.final h2{font-family:var(--font-serif);font-weight:400;color:var(--moon);
+  font-size:clamp(24px,3.6vw,44px);line-height:2;letter-spacing:.16em}
+.final .lead{margin:28px auto 0;color:var(--moon-2)}
+.footer{position:relative;isolation:isolate;color:var(--moon-2);padding:0 var(--gutter) 48px;font-size:12px;letter-spacing:.06em}
+.footer::before{content:"";position:absolute;inset:-240px 0 0 0;z-index:-1;
+  background:linear-gradient(180deg, rgba(11,10,12,0) 0%, rgba(11,10,12,.55) 120px, #0b0a0c 240px, #0b0a0c 100%)}
+.footer-inner{max-width:var(--max);margin:0 auto;display:grid;gap:40px}
+.footer-policy{border:1px solid rgba(238,233,223,.14);padding:clamp(22px,3vw,36px);line-height:2.2;font-size:11.5px}
+.footer-policy strong{display:block;color:var(--moon);font-weight:400;font-family:var(--font-serif);letter-spacing:.14em;margin-bottom:8px}
+.footer-nav{display:flex;flex-wrap:wrap;gap:14px 28px}
+.footer-nav a{transition:color 600ms var(--ease)}
+.footer-nav a:hover{color:var(--gold)}
+.footer-base{display:flex;flex-wrap:wrap;gap:16px;justify-content:space-between;align-items:baseline}
+.footer-logo{font-family:var(--font-display);font-size:18px;letter-spacing:.3em;color:var(--moon)}
+
+.cta-fixed{display:none}
+@media (max-width:767px){
+  .cta-fixed{display:flex;position:fixed;left:16px;right:16px;bottom:16px;z-index:40;gap:10px}
+  .cta-fixed .btn{flex:1;background:rgba(18,17,20,.9);color:var(--moon);border-color:rgba(var(--gold-rgb),.5)}
+}
+</style>
+</head>
+<body>
+<div class="bg-canvas" aria-hidden="true"></div>
+<div class="bg-grain" aria-hidden="true"></div>
+
+<!-- 0. ローディング：暗幕→ブランド名→金の水平線。VIDEO 01 へ連続させる第一幕 -->
+<div id="loading" aria-hidden="true">
+  <div style="display:grid;place-items:center">
+    <div class="word js-split">MELIORA</div>
+    <div class="line"></div>
+  </div>
+</div>
+
+<!-- 1. ヘッダー -->
+<header class="header js-header">
+  <a class="logo" href="#top">MELIORA</a>
+  <nav class="nav" aria-label="メイン">
+    <a href="#concern">悩みから探す</a>
+    <a href="#treatments">施術を知る</a>
+    <a href="#clinic">クリニック検索</a>
+    <a href="#compare">比較する</a>
+    <a href="#knowledge">読みもの</a>
+  </nav>
+  <a class="btn" href="#concern">探しはじめる</a>
+</header>
+
+<main id="top">
+
+<!-- 2. HERO：キー演出「光がゆっくり差す」。h1は理念そのもの -->
+<section class="hero section-dark section-dark--top" aria-label="メインビジュアル">
+  <div class="hero-visual" aria-hidden="true">
+    <!-- 要差替: VIDEO 01 男女の静かなポートレート（24fps / slow dolly / shallow DOF）
+         <video class="hero-film hero-settle" autoplay muted loop playsinline poster="assets/hero.jpg">…</video> -->
+    <div class="hero-film hero-settle"><div class="light-drift" style="position:absolute;inset:0;background:radial-gradient(46% 58% at 62% 44%, rgba(224,196,158,.22) 0%, rgba(224,196,158,0) 60%)"></div></div>
+    <div class="hero-vignette"></div>
+  </div>
+  <div class="inner">
+    <div class="hero-copy">
+      <p class="hero-en reveal">Know. Compare. Choose.</p>
+      <h1 class="reveal" style="animation-delay:120ms">美しさに、<br>正しい選択肢を。</h1>
+      <p class="hero-sub reveal" style="animation-delay:240ms">
+        髪、肌、目、歯、身体。美容医療には、いくつもの選択肢があります。<br>
+        知る。比べる。そして、自分で選ぶ。<br>
+        あなたの選択を支える、美容医療総合ガイド。
+      </p>
+      <div class="hero-cta stagger">
+        <a class="btn btn--solid" style="--i:0" href="#concern">悩みから探す</a>
+        <a class="btn" style="--i:1" href="#treatments">施術から探す</a>
+        <a class="btn" style="--i:2" href="#compare">クリニックを比較する</a>
+      </div>
+    </div>
+  </div>
+  <div class="hero-scroll" aria-hidden="true">SCROLL</div>
+</section>
+
+<!-- 3. カテゴリー：部位から直感的に -->
+<section class="section-dark" id="categories">
+  <div class="inner">
+    <p class="kicker reveal">Categories</p>
+    <h2 class="h2 reveal">Where do you begin?</h2>
+    <p class="h-ja reveal">気になる場所から、静かに始める。</p>
+    <div class="cat-grid stagger">
+      <!-- 要差替: VIDEO 02 自然光が髪を横切るマクロ映像 -->
+      <a class="cat-card" style="--i:0" href="#concern">
+        <div class="vis vis--hair" aria-hidden="true"><div class="vis-core"></div></div>
+        <span class="cat-label"><span class="en">HAIR</span><span class="ja">薄毛・AGA・FAGA・育毛</span></span>
+        <span class="cat-line" aria-hidden="true"></span>
+      </a>
+      <!-- 要差替: VIDEO 04 横顔・フェイスライン・肌を柔らかな光で -->
+      <a class="cat-card" style="--i:1" href="#concern">
+        <div class="vis vis--face" aria-hidden="true"><div class="vis-core"></div></div>
+        <span class="cat-label"><span class="en">FACE</span><span class="ja">二重・鼻・輪郭・リフトアップ・肌治療</span></span>
+        <span class="cat-line" aria-hidden="true"></span>
+      </a>
+      <!-- 要差替: VIDEO 03 目元と光の反射を抽象的に -->
+      <a class="cat-card" style="--i:2" href="#concern">
+        <div class="vis vis--eyes" aria-hidden="true"><div class="vis-core"></div></div>
+        <span class="cat-label"><span class="en">EYES</span><span class="ja">ICL・視力矯正</span></span>
+        <span class="cat-line" aria-hidden="true"></span>
+      </a>
+      <!-- 要差替: VIDEO 05 自然な笑顔と口元を上品に -->
+      <a class="cat-card" style="--i:3" href="#concern">
+        <div class="vis vis--smile" aria-hidden="true"><div class="vis-core"></div></div>
+        <span class="cat-label"><span class="en">SMILE</span><span class="ja">インプラント・ラミネートベニア・審美歯科</span></span>
+        <span class="cat-line" aria-hidden="true"></span>
+      </a>
+      <a class="cat-card" style="--i:4" href="#concern">
+        <div class="vis vis--body" aria-hidden="true"><div class="vis-core"></div></div>
+        <span class="cat-label"><span class="en">BODY</span><span class="ja">医療脱毛・医療ダイエット・痩身</span></span>
+        <span class="cat-line" aria-hidden="true"></span>
+      </a>
+      <!-- 要差替: VIDEO 06 男性のシルエットを建築的な光で -->
+      <a class="cat-card" style="--i:5" href="#formen">
+        <div class="vis vis--men" aria-hidden="true"><div class="vis-core"></div></div>
+        <span class="cat-label"><span class="en">MEN'S</span><span class="ja">AGA・包茎手術・男性医療</span></span>
+        <span class="cat-line" aria-hidden="true"></span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- 4. SECTION 01 悩みから探す（アイボリーゾーンへ移行） -->
+<section id="concern">
+  <div class="inner">
+    <div class="bgword" style="top:-40px;right:-4%" aria-hidden="true">DISCOVER</div>
+    <p class="kicker reveal">01 — Find Your Concern</p>
+    <h2 class="h2 reveal">Start from you.</h2>
+    <p class="h-ja reveal">悩みから、選択肢を知る。</p>
+    <p class="lead reveal" style="margin-top:32px">
+      施術の名前を、知らなくてかまいません。いま気になっていることを、そのままの言葉で選んでください。
+      そこから治療の選択肢へ、静かにご案内します。
+    </p>
+    <nav class="concern-list stagger" aria-label="悩みから探す">
+      <a style="--i:0" href="#treatments">髪が気になる<span class="tag">HAIR</span></a>
+      <a style="--i:1" href="#treatments">目元を変えたい<span class="tag">FACE</span></a>
+      <a style="--i:2" href="#treatments">視力を改善したい<span class="tag">EYES</span></a>
+      <a style="--i:3" href="#treatments">歯を美しくしたい<span class="tag">SMILE</span></a>
+      <a style="--i:4" href="#treatments">口元が気になる<span class="tag">SMILE</span></a>
+      <a style="--i:5" href="#treatments">身体の悩みを相談したい<span class="tag">BODY</span></a>
+    </nav>
+  </div>
+</section>
+
+<!-- 5. SECTION 02 施術を知る -->
+<section id="treatments">
+  <div class="inner">
+    <p class="kicker reveal">02 — Discover Treatments</p>
+    <h2 class="h2 reveal">Options you didn't know.</h2>
+    <p class="h-ja reveal">知らなかった選択肢に、出会う。</p>
+    <div class="guide-grid">
+      <div class="reveal">
+        <p class="lead">
+          すべての治療ガイドは、同じ編集の型で書かれています。良いことだけを並べない。
+          リスクも費用も、判断に必要な材料をひとつの机の上に置く。それが私たちの編集方針です。
+        </p>
+        <div class="note-frame" style="margin-top:36px">
+          <strong>編集方針について</strong>
+          特定の施術を過度に推奨する構成は採用していません。治療効果を保証する表現、
+          過度なビフォーアフター表現は掲載しません。効果・経過には個人差があります。
+          最終的な治療の判断は、必ず医師の診察のもとで行ってください。
+        </div>
+      </div>
+      <div class="reveal" style="animation-delay:160ms">
+        <p style="font-size:12px;letter-spacing:.24em;color:var(--ink-2);margin-bottom:18px">各治療ガイドに載っている10の項目</p>
+        <ol class="guide-items">
+          <li>治療概要</li>
+          <li>治療方法</li>
+          <li>メリット</li>
+          <li>デメリット</li>
+          <li>想定されるリスク・副作用</li>
+          <li>費用の目安</li>
+          <li>ダウンタイム</li>
+          <li>治療期間</li>
+          <li>向いている可能性がある人</li>
+          <li>医師へ確認すべきポイント</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="hairline" aria-hidden="true"></div>
+
+<!-- 6. SECTION 03 クリニック検索 -->
+<section id="clinic">
+  <div class="inner">
+    <div class="bgword" style="bottom:-60px;left:-6%" aria-hidden="true">COMPARE</div>
+    <p class="kicker reveal">03 — Find a Clinic</p>
+    <h2 class="h2 reveal">A fair way to search.</h2>
+    <p class="h-ja reveal">クリニック選びにも、比較できる基準を。</p>
+    <p class="lead reveal" style="margin-top:32px">
+      エリア、施術、料金、診療時間、設備・サービス。ひとつの条件だけで決めないために、
+      複数の条件を重ねて検索できます。
+    </p>
+    <nav class="area-grid stagger" aria-label="主要都市から探す">
+      <a style="--i:0" href="#compare"><span class="en">TOKYO</span><span class="ja">東京</span></a>
+      <a style="--i:1" href="#compare"><span class="en">OSAKA</span><span class="ja">大阪</span></a>
+      <a style="--i:2" href="#compare"><span class="en">NAGOYA</span><span class="ja">名古屋</span></a>
+      <a style="--i:3" href="#compare"><span class="en">FUKUOKA</span><span class="ja">福岡</span></a>
+      <a style="--i:4" href="#compare"><span class="en">SAPPORO</span><span class="ja">札幌</span></a>
+      <a style="--i:5" href="#compare"><span class="en">YOKOHAMA</span><span class="ja">横浜</span></a>
+      <a style="--i:6" href="#compare"><span class="en">KYOTO</span><span class="ja">京都</span></a>
+      <a style="--i:7" href="#compare"><span class="en">KOBE</span><span class="ja">神戸</span></a>
+      <a style="--i:8" href="#compare"><span class="en">SENDAI</span><span class="ja">仙台</span></a>
+      <a style="--i:9" href="#compare"><span class="en">HIROSHIMA</span><span class="ja">広島</span></a>
+    </nav>
+    <div class="filter-row reveal" aria-label="検索条件">
+      <a class="chip" href="#compare">施術から探す</a>
+      <a class="chip" href="#compare">料金から探す</a>
+      <a class="chip" href="#compare">診療時間から探す</a>
+      <a class="chip" href="#compare">設備・サービスから探す</a>
+      <a class="chip" href="#compare">カウンセリング重視で探す</a>
+    </div>
+  </div>
+</section>
+
+<!-- 7. SECTION 04 比較 -->
+<section id="compare">
+  <div class="inner">
+    <p class="kicker reveal">04 — Compare</p>
+    <h2 class="h2 reveal">Beyond the price.</h2>
+    <p class="h-ja reveal">価格だけでは、決めない。</p>
+    <p class="lead reveal" style="margin-top:32px">
+      施術内容、料金、追加費用、保証・アフターケア、医師の情報、アクセス、診療時間、
+      カウンセリング、支払い方法。判断の材料を、横に並べて見比べられます。
+      広告掲載を含む場合は、その旨を明示します。
+    </p>
+    <!-- 比較サンプル。クリニック名・数値はすべて架空のサンプル値（要差替: 実データ） -->
+    <div class="cmp-wrap reveal">
+      <table class="cmp">
+        <caption style="text-align:left;font-size:12px;color:var(--ink-2);padding-bottom:14px;letter-spacing:.1em">比較イメージ（サンプル表示・実在のクリニックではありません）</caption>
+        <thead>
+          <tr>
+            <th scope="col" style="width:9em"></th>
+            <th scope="col">Aクリニック<span class="pr-badge">PR</span></th>
+            <th scope="col">Bクリニック</th>
+            <th scope="col">Cクリニック</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><th scope="row">施術内容</th><td>内服・外用・注入</td><td>内服・外用</td><td>内服・注入・自毛植毛</td></tr>
+          <tr><th scope="row">費用の目安</th><td>月々 ○,○○○円〜</td><td>月々 ○,○○○円〜</td><td>月々 ○,○○○円〜</td></tr>
+          <tr><th scope="row">追加費用</th><td>初診料・検査費あり</td><td>なし（薬代のみ）</td><td>検査費あり</td></tr>
+          <tr><th scope="row">保証・アフターケア</th><td>全額返金制度あり※条件</td><td>定期経過観察</td><td>術後1年フォロー</td></tr>
+          <tr><th scope="row">カウンセリング</th><td>無料・オンライン可</td><td>無料</td><td>初回有料</td></tr>
+          <tr><th scope="row">診療時間</th><td>10:00–19:00</td><td>11:00–20:00</td><td>9:30–18:30</td></tr>
+          <tr><th scope="row">支払い方法</th><td>現金・カード・医療ローン</td><td>現金・カード</td><td>現金・カード・分割</td></tr>
+          <tr>
+            <th scope="row"></th>
+            <td><a class="link" href="#" rel="sponsored nofollow">公式サイトで詳細を見る</a></td>
+            <td><a class="link" href="#">料金・施術内容を確認</a></td>
+            <td><a class="link" href="#">カウンセリング情報を見る</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="cmp-note reveal">
+      ※「PR」表記のあるクリニックは、当サイトが広告料を受領している広告掲載です。掲載順・評価は広告の有無と切り離して編集しています。<br>
+      ※ 費用は自由診療のため全額自己負担です。金額・内容は各クリニックの公式情報を必ずご確認ください。
+    </p>
+  </div>
+</section>
+
+<!-- 8. SECTION 05 FOR MEN（濃色バンド） -->
+<section class="section-dark" id="formen">
+  <div class="inner">
+    <p class="kicker reveal">05 — For Men</p>
+    <h2 class="h2 reveal">Quietly, for yourself.</h2>
+    <p class="h-ja reveal">誰にも急かされず、自分のために。</p>
+    <div class="men-grid">
+      <div class="men-visual reveal" aria-hidden="true">
+        <!-- 要差替: VIDEO 06 男性のシルエットを建築的な光で撮影した映像 -->
+        <div class="vis vis--men" style="position:absolute;inset:0"><div class="vis-core light-drift"></div></div>
+      </div>
+      <div>
+        <p class="lead reveal">
+          プライバシー性の高い悩みこそ、静かな場所で調べられるべきだと考えています。
+          男性の美容医療も、同じ基準・同じ編集方針で。煽らず、事実だけを整えて。
+        </p>
+        <nav class="men-list stagger" style="margin-top:40px" aria-label="男性向けカテゴリー">
+          <a style="--i:0" href="#treatments">AGA・薄毛治療<span class="arrow">→</span></a>
+          <a style="--i:1" href="#treatments">男性美容・スキンケア治療<span class="arrow">→</span></a>
+          <a style="--i:2" href="#treatments">医療脱毛<span class="arrow">→</span></a>
+          <a style="--i:3" href="#treatments">包茎手術・デリケートな相談<span class="arrow">→</span></a>
+        </nav>
+        <div class="men-words reveal" aria-hidden="true"><span>PRIVATE</span><span>CALM</span><span>CONFIDENCE</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 9. SECTION 06 KNOWLEDGE -->
+<section id="knowledge" style="padding-top:clamp(140px,20vw,300px)">
+  <div class="inner">
+    <div class="bgword" style="top:-30px;right:-2%" aria-hidden="true">KNOW</div>
+    <p class="kicker reveal">06 — Knowledge</p>
+    <h2 class="h2 reveal">Read before you choose.</h2>
+    <p class="h-ja reveal">選ぶ前に、知っておく。</p>
+    <!-- 記事タイトルはサンプル。要差替: 実記事・実在の監修者名 -->
+    <div class="mag-list stagger">
+      <article style="--i:0"><a href="#">
+        <span class="mag-cat">Beginner's Guide</span>
+        <span class="mag-title">はじめての美容医療。カウンセリングの前に読む、7つの基礎知識</span>
+        <span class="mag-meta">監修：○○○○ 医師 ／ 2026.08.28 更新</span>
+      </a></article>
+      <article style="--i:1"><a href="#">
+        <span class="mag-cat">Cost &amp; Risk</span>
+        <span class="mag-title">「総額いくら？」を曖昧にしない。自由診療の費用の読み方</span>
+        <span class="mag-meta">監修：○○○○ 医師 ／ 2026.08.15 更新</span>
+      </a></article>
+      <article style="--i:2"><a href="#">
+        <span class="mag-cat">Downtime</span>
+        <span class="mag-title">ダウンタイムは「隠す期間」ではなく「回復の設計」。施術別の目安</span>
+        <span class="mag-meta">監修：○○○○ 医師 ／ 2026.07.30 更新</span>
+      </a></article>
+      <article style="--i:3"><a href="#">
+        <span class="mag-cat">How to Choose</span>
+        <span class="mag-title">クリニックより先に、医師を見る。カウンセリングで確認したい質問リスト</span>
+        <span class="mag-meta">監修：○○○○ 医師 ／ 2026.07.12 更新</span>
+      </a></article>
+    </div>
+  </div>
+</section>
+
+<!-- 10. 最終CTA：暗いシネマティックへ -->
+<section class="final section-dark section-dark--bottom" id="start" aria-label="最終案内">
+  <div class="final-visual" aria-hidden="true">
+    <div class="final-film"><div class="light-drift" style="position:absolute;inset:0;background:radial-gradient(40% 50% at 50% 40%, rgba(216,192,158,.16) 0%, rgba(216,192,158,0) 60%)"></div></div>
+    <div class="hero-vignette"></div>
+  </div>
+  <div class="inner">
+    <h2 class="reveal">選択肢を知ることから、<br>あなたの美容医療は始まる。</h2>
+    <p class="lead reveal" style="animation-delay:140ms;text-align:center">
+      髪も、肌も、目も、歯も、身体も。<br>自分らしい選択をするために。
+    </p>
+    <div class="hero-cta stagger" style="justify-content:center">
+      <a class="btn btn--solid" style="--i:0" href="#categories">美容医療を探す</a>
+      <a class="btn" style="--i:1" href="#concern">悩みから探す</a>
+    </div>
+  </div>
+</section>
+</main>
+
+<!-- 11. フッター -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-policy reveal">
+      <strong>掲載方針・免責事項</strong>
+      当サイトは美容医療・自由診療に関する情報メディアです。広告・PR・アフィリエイトを含む場合は該当箇所に明示します。
+      掲載内容は治療効果を保証するものではなく、効果・リスク・経過には個人差があります。
+      自由診療は公的医療保険の適用外です。治療の判断は必ず医療機関での診察・説明を受けたうえで行ってください。
+      記事は監修者・執筆者・更新日・参考情報を明記する編集体制で運営しています。
+      MELIORA（メリオラ）は、ラテン語で「より良きものへ」を意味します。
+    </div>
+    <nav class="footer-nav" aria-label="フッター">
+      <a href="#concern">悩みから探す</a>
+      <a href="#treatments">施術を知る</a>
+      <a href="#clinic">クリニック検索</a>
+      <a href="#compare">比較する</a>
+      <a href="#formen">メンズ</a>
+      <a href="#knowledge">読みもの</a>
+      <a href="#">運営者情報</a><!-- 要差替: 運営会社ページ -->
+      <a href="#">編集・広告掲載ポリシー</a>
+      <a href="#">プライバシーポリシー</a>
+    </nav>
+    <div class="footer-base">
+      <span class="footer-logo">MELIORA</span>
+      <span>© MELIORA — 美容医療総合ガイド<!-- 要差替: 運営会社名 --></span>
+    </div>
+  </div>
+</footer>
+
+<div class="cta-fixed"><a class="btn" href="#concern">悩みから探す</a></div>
+
+<script>
+(function(){
+  'use strict';
+  var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (/[?&]qa=1/.test(location.search)) { document.documentElement.classList.add('is-qa'); reduce = true; }
+
+  /* ローディング：文字分解 → 1.2秒以内に必ず開幕 */
+  var split = document.querySelector('.js-split');
+  if (split) {
+    var t = split.textContent.trim(); split.textContent = '';
+    t.split('').forEach(function(ch, i){ var s=document.createElement('span'); s.textContent=ch; s.style.setProperty('--i', i); split.appendChild(s); });
+  }
+  var loading = document.getElementById('loading');
+  function openSite(){ if(loading) loading.classList.add('is-done'); }
+  if (reduce) openSite(); else setTimeout(openSite, 1050);
+  setTimeout(openSite, 1200); /* 保険 */
+
+  /* IntersectionObserver 1本で reveal / stagger を束ねる */
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(!e.isIntersecting) return;
+      e.target.classList.add('is-in');
+      io.unobserve(e.target);
+    });
+  }, {rootMargin:'0px 0px -10% 0px', threshold:.12});
+  var pending = Array.prototype.slice.call(document.querySelectorAll('.reveal,.stagger'));
+  pending.forEach(function(el){ io.observe(el); });
+
+  /* 高速スクロールでIOを素通りした要素の保険（既にファーストビューより上にあるものは即時表示） */
+  function sweepMissed(){
+    pending = pending.filter(function(el){
+      if (el.classList.contains('is-in')) return false;
+      if (el.getBoundingClientRect().top < innerHeight * .9){
+        el.classList.add('is-in'); io.unobserve(el); return false;
+      }
+      return true;
+    });
+  }
+
+  /* ヘッダーの色をゾーン（暗/明）に合わせて切り替え */
+  var header = document.querySelector('.js-header');
+  var darkZones = Array.prototype.slice.call(document.querySelectorAll('.section-dark,.footer'));
+  function syncHeader(){
+    var probe = 40; /* ヘッダー中心付近 */
+    var onDark = darkZones.some(function(el){
+      var r = el.getBoundingClientRect();
+      return r.top <= probe && r.bottom >= probe;
+    });
+    header.classList.toggle('on-light', !onDark);
+  }
+  var ticking = false;
+  addEventListener('scroll', function(){
+    if (ticking) return; ticking = true;
+    requestAnimationFrame(function(){ syncHeader(); sweepMissed(); ticking = false; });
+  }, {passive:true});
+  syncHeader();
+
+  /* 固定ヘッダー分のアンカー補正 */
+  document.querySelectorAll('a[href^="#"]').forEach(function(a){ a.addEventListener('click', function(ev){
+    var id=a.getAttribute('href'); if(id.length<2) return; var el=document.querySelector(id); if(!el) return;
+    ev.preventDefault(); var y=el.getBoundingClientRect().top+scrollY-64; scrollTo({top:y, behavior: reduce?'auto':'smooth'}); }); });
+})();
+</script>
+</body>
+</html>
